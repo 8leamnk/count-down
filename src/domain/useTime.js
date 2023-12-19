@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import VALUE from '../constants/value';
 
 function useTime(initialTime) {
@@ -20,12 +20,6 @@ function useTime(initialTime) {
     clearTimeout(timeId.current);
     timeId.current = null;
   }, []);
-
-  useEffect(() => {
-    if (!time) {
-      removeTimeId();
-    }
-  }, [time]);
 
   return { time, resetTime, createTimeId, removeTimeId };
 }
