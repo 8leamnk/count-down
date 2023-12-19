@@ -1,5 +1,4 @@
 import { useCallback, useState } from 'react';
-import VALUE from '../constants/value';
 
 function useStart() {
   const [isStart, setIsStart] = useState(false);
@@ -8,7 +7,7 @@ function useStart() {
     (createTimeId) => {
       if (!isStart) {
         setIsStart(true);
-        createTimeId(VALUE.ms);
+        createTimeId();
       }
     },
     [isStart],
