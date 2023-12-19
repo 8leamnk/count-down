@@ -1,19 +1,18 @@
 import { useCallback, useState } from 'react';
 
-function useStart() {
+function useStart(createTimeId) {
   const [isStart, setIsStart] = useState(false);
 
-  const onStart = useCallback(
-    (createTimeId) => {
-      if (!isStart) {
-        setIsStart(true);
-        createTimeId();
-      }
-    },
-    [isStart],
-  );
+  const handleStart = useCallback((nextState) => setIsStart(nextState), []);
 
-  return { isStart, onStart };
+  const onStart = useCallback(() => {
+    if (!isStart) {
+      handleStart(true);
+      createTimeId();
+    }
+  }, [isStart, handleStart, createTimeId]);
+
+  return { isStart, onStart, handleStart };
 }
 
 export default useStart;
