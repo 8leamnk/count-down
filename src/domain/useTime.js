@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useRef, useState } from 'react';
-import VALUE from '../constants/value';
+
+const MS = 1000;
 
 function useTime(initialTime) {
   const timeId = useRef(null);
@@ -9,11 +10,9 @@ function useTime(initialTime) {
   const resetTime = useCallback(() => setTime(0), []);
 
   const createTimeId = useCallback(() => {
-    const { ms } = VALUE;
-
     timeId.current = setInterval(() => {
-      setTime((curState) => curState - ms);
-    }, ms);
+      setTime((curState) => curState - MS);
+    }, MS);
   }, [timeId]);
 
   const removeTimeId = useCallback(() => {
