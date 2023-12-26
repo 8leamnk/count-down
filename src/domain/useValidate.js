@@ -4,8 +4,8 @@ import VALUE from '../constants/value';
 
 const RANGE = Object.freeze({
   minutes: 0,
-  second: 1,
-  min: 0,
+  second: 0,
+  min: 1,
   max: 3599 * VALUE.msUnit,
 });
 const ERROR_RETURN = 0;
@@ -16,8 +16,7 @@ function useValidate() {
     const range = RANGE[type];
 
     if (!Number.isSafeInteger(range) || number < range) {
-      window.alert(MESSAGE.error.rangeEach);
-      return ERROR_RETURN;
+      throw new Error(MESSAGE.error.rangeEach);
     }
 
     return number;
@@ -36,8 +35,7 @@ function useValidate() {
       const initialTime = calculateinitialTime(inputsMap);
 
       if (initialTime < min || initialTime > max) {
-        window.alert(MESSAGE.error.rangeTotal);
-        return ERROR_RETURN;
+        throw new Error(MESSAGE.error.rangeTotal);
       }
 
       return initialTime;
@@ -59,7 +57,16 @@ function useValidate() {
     [validateRange, validateTotalTime],
   );
 
-  return { validate };
+  const getInitialTime = (inputs) => {
+    try {
+      return validate(inputs);
+    } catch (error) {
+      window.alert(error.message);
+      return ERROR_RETURN;
+    }
+  };
+
+  return { getInitialTime };
 }
 
 export default useValidate;
