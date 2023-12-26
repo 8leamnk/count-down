@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-function useStart(handleTime, createTimeId) {
+function useStart({ handleTime, createTimeId }) {
   const [isStart, setIsStart] = useState(false);
 
   const handleStart = useCallback((nextState) => setIsStart(nextState), []);
