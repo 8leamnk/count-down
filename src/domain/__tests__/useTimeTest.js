@@ -1,5 +1,4 @@
-import { renderHook } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
+import { act, renderHook } from '@testing-library/react';
 import useTime from '../useTime';
 
 describe('타이머 관리 테스트', () => {
@@ -10,6 +9,7 @@ describe('타이머 관리 테스트', () => {
 
     // when
     const { result } = renderHook(() => useTime());
+
     act(() => {
       result.current.handleTime(INITIAL_TIME);
     });
@@ -28,6 +28,7 @@ describe('타이머 관리 테스트', () => {
 
     // when
     const { result } = renderHook(() => useTime());
+
     act(() => {
       result.current.handleTime(INITIAL_TIME);
       result.current.createTimeId();
