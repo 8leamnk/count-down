@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-function usePause(createTimeId, removeTimeId) {
+function usePause({ createTimeId, removeTimeId }) {
   const [isPause, setIsPause] = useState(false);
 
   const handlePause = useCallback((nextState) => setIsPause(nextState), []);
@@ -15,7 +15,7 @@ function usePause(createTimeId, removeTimeId) {
     }
   }, [isPause, handlePause, createTimeId, removeTimeId]);
 
-  return { handlePauseOrRestart, handlePause };
+  return { isPause, handlePauseOrRestart, handlePause };
 }
 
 export default usePause;
