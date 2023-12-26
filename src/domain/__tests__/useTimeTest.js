@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
-import useTime from '../useTime';
 import { act } from 'react-dom/test-utils';
+import useTime from '../useTime';
 
 describe('타이머 관리 테스트', () => {
   test('time의 초기값이 제대로 반영 된다.', () => {
