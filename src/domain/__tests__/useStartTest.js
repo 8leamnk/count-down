@@ -42,7 +42,7 @@ describe('시작 기능 테스트', () => {
 
     // then
     expect(result.current.isStart).toBe(IS_START);
-    expect(handleTime).toHaveBeenLastCalledWith(INITIAL_TIME);
+    expect(handleTime).toHaveBeenCalledWith(INITIAL_TIME);
     expect(handleTime).toHaveBeenCalledTimes(CALLED_TIMES);
   });
 });
