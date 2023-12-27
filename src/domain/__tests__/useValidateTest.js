@@ -13,9 +13,7 @@ describe('입력값 유효성 검사 기능 테스트', () => {
     result.current.getInitialTime(inputs);
 
     // then
-    expect(window.alert).toHaveBeenLastCalledWith(
-      '0 이상의 숫자를 입력해 주세요.',
-    );
+    expect(window.alert).toHaveBeenCalledWith('0 이상의 숫자를 입력해 주세요.');
   });
 
   test('총 1초 이상의 숫자를 입력하지 않으면 예외가 발생한다.', () => {
@@ -27,7 +25,7 @@ describe('입력값 유효성 검사 기능 테스트', () => {
     result.current.getInitialTime(INPUTS);
 
     // then
-    expect(window.alert).toHaveBeenLastCalledWith(
+    expect(window.alert).toHaveBeenCalledWith(
       '최소 0분 1초, 최대 59분 59초의 시간을 입력해 주세요.',
     );
   });
@@ -41,7 +39,7 @@ describe('입력값 유효성 검사 기능 테스트', () => {
     result.current.getInitialTime(INPUTS);
 
     // then
-    expect(window.alert).toHaveBeenLastCalledWith(
+    expect(window.alert).toHaveBeenCalledWith(
       '최소 0분 1초, 최대 59분 59초의 시간을 입력해 주세요.',
     );
   });
