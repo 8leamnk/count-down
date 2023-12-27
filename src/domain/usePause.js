@@ -15,7 +15,7 @@ function usePause({ createTimeId, removeTimeId }) {
     }
   }, [isPause, handlePause, createTimeId, removeTimeId]);
 
-  return { isPause, handlePauseOrRestart, handlePause };
+  return { handlePauseOrRestart, handlePause };
 }
 
 export default usePause;
