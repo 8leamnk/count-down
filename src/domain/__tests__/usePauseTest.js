@@ -17,29 +17,32 @@ describe('일시정지, 재시작 기능 테스트', () => {
     });
 
     act(() => {
-      result.current.handlePauseOrRestart();
+      result.current.onPauseOrRestart();
     });
 
     // then
     expect(createTimeId).toHaveBeenCalledTimes(NOT_ONCE);
     expect(removeTimeId).toHaveBeenCalledTimes(ONCE);
+    expect(result.current.isPause).toBe(true);
 
     // when
     act(() => {
-      result.current.handlePauseOrRestart();
+      result.current.onPauseOrRestart();
     });
 
     // then
     expect(createTimeId).toHaveBeenCalledTimes(ONCE);
     expect(removeTimeId).toHaveBeenCalledTimes(ONCE);
+    expect(result.current.isPause).toBe(false);
 
     // when
     act(() => {
-      result.current.handlePauseOrRestart();
+      result.current.onPauseOrRestart();
     });
 
     // then
     expect(createTimeId).toHaveBeenCalledTimes(ONCE);
     expect(removeTimeId).toHaveBeenCalledTimes(TWICE);
+    expect(result.current.isPause).toBe(true);
   });
 });
