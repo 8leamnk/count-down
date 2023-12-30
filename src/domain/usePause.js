@@ -5,7 +5,7 @@ function usePause({ createTimeId, removeTimeId }) {
 
   const handlePause = useCallback((nextState) => setIsPause(nextState), []);
 
-  const handlePauseOrRestart = useCallback(() => {
+  const onPauseOrRestart = useCallback(() => {
     if (isPause) {
       handlePause(false);
       createTimeId();
@@ -15,7 +15,7 @@ function usePause({ createTimeId, removeTimeId }) {
     }
   }, [isPause, handlePause, createTimeId, removeTimeId]);
 
-  return { handlePauseOrRestart, handlePause };
+  return { isPause, onPauseOrRestart, handlePause };
 }
 
 export default usePause;
