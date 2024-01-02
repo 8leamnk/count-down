@@ -1,5 +1,7 @@
+import CountdownController from './controller/CountdownController';
+
 function App() {
-  return <></>;
+  return <CountdownController />;
 }
 
 export default App;
