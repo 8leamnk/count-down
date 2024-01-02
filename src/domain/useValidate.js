@@ -8,9 +8,12 @@ const RANGE = Object.freeze({
   min: 1,
   max: 3599 * VALUE.msUnit,
 });
-const ERROR_RETURN = 0;
+const ERROR_INFO = Object.freeze({
+  return: 0,
+  title: 'ERROR',
+});
 
-function useValidate() {
+function useValidate({ inputs, handlePopup }) {
   const validateRange = useCallback((answer, type) => {
     const number = Number(answer);
     const range = RANGE[type];
@@ -43,26 +46,26 @@ function useValidate() {
     [calculateinitialTime],
   );
 
-  const validate = useCallback(
-    (inputs) => {
-      const inputsMap = new Map(Object.entries(inputs));
+  const validate = useCallback(() => {
+    const inputsMap = new Map(Object.entries(inputs));
 
-      inputsMap.forEach((answer, type) => {
-        const number = validateRange(answer, type);
-        inputsMap.set(type, number);
-      });
+    inputsMap.forEach((answer, type) => {
+      const number = validateRange(answer, type);
+      inputsMap.set(type, number);
+    });
 
-      return validateTotalTime(inputsMap);
-    },
-    [validateRange, validateTotalTime],
-  );
+    return validateTotalTime(inputsMap);
+  }, [inputs, validateRange, validateTotalTime]);
 
-  const getInitialTime = (inputs) => {
+  const getInitialTime = () => {
     try {
-      return validate(inputs);
+      return validate();
     } catch (error) {
-      window.alert(error.message);
-      return ERROR_RETURN;
+      handlePopup({
+        title: ERROR_INFO.title,
+        description: error.message,
+      });
+      return ERROR_INFO.return;
     }
   };
 
