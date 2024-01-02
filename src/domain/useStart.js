@@ -1,22 +1,21 @@
 import { useCallback, useState } from 'react';
 
-function useStart({ handleTime, createTimeId }) {
+function useStart({ getInitialTime, handleTime, createTimeId }) {
   const [isStart, setIsStart] = useState(false);
 
-  const handleStart = useCallback((nextState) => setIsStart(nextState), []);
+  const handleIsStart = useCallback((nextState) => setIsStart(nextState), []);
 
-  const handleStartCountdown = useCallback(
-    (initialTime) => {
-      if (!isStart && initialTime) {
-        handleStart(true);
-        handleTime(initialTime);
-        createTimeId();
-      }
-    },
-    [isStart, handleStart, handleTime, createTimeId],
-  );
+  const onStart = useCallback(() => {
+    const initialTime = getInitialTime();
 
-  return { isStart, handleStartCountdown, handleStart };
+    if (!isStart && initialTime) {
+      handleIsStart(true);
+      handleTime(initialTime);
+      createTimeId();
+    }
+  }, [isStart, handleIsStart, getInitialTime, handleTime, createTimeId]);
+
+  return { isStart, handleIsStart, onStart };
 }
 
 export default useStart;
