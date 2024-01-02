@@ -4,8 +4,8 @@
 
 ### input(입력) 기능
 
-- [ ] 분 input
-- [ ] 초 input
+- [x] 분 input
+- [x] 초 input
 
 ### 유효성 검사 기능
 

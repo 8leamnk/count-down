@@ -11,9 +11,7 @@ function useInputs() {
 
   const onChange = useCallback(
     (e) => {
-      const { name, value } = e.target;
-
-      setInputs({ ...inputs, [name]: value });
+      setInputs({ ...inputs, [e.target.name]: e.target.value });
     },
     [inputs],
   );
