@@ -1,0 +1,29 @@
+name: React build
+on:
+  push:
+    branches:
+      - main # main Branch에서 push 이벤트가 일어났을 때만 실행
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code. # 레포지토리 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Cache node modules # npm 캐시
+        id: npm-cache
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+            ${{ runner.os }}
+
+      - name: Install
+        if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
+        run: npm install
+
+      - name: Lint
+        run: npm run lint # eslint 실행
