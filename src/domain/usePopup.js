@@ -8,10 +8,12 @@ function usePopup() {
 
   const handlePopup = useCallback(
     (nextPopupInfo = POPUP_INFO) => {
-      setPopupOpened(!popupOpened);
+      const { title, description } = nextPopupInfo;
+
+      setPopupOpened(title !== '' && description !== '');
       setPopupInfo({ ...popupInfo, ...nextPopupInfo });
     },
-    [popupOpened, popupInfo],
+    [popupInfo],
   );
 
   return { popupOpened, popupInfo, handlePopup };
