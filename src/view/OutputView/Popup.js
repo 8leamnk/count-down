@@ -75,12 +75,12 @@ const CONFIRM_BTN_TEXT = 'CONFIRM';
 function Popup({ popupOpened, popupInfo, handlePopup }) {
   if (popupOpened) {
     return (
-      <S.Wrapper onClick={handlePopup}>
+      <S.Wrapper onClick={() => handlePopup()}>
         <S.Inner onClick={(e) => e.stopPropagation()}>
           <S.Title>{popupInfo.title}</S.Title>
           <S.Description>{popupInfo.description}</S.Description>
           <S.Confirm>
-            <S.ConfirmBtn onClick={handlePopup}>
+            <S.ConfirmBtn onClick={() => handlePopup()}>
               {CONFIRM_BTN_TEXT}
             </S.ConfirmBtn>
           </S.Confirm>
