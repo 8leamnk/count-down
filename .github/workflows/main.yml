@@ -2,7 +2,7 @@ name: React build
 on:
   push:
     branches:
-      - feature/action # main Branch에서 push 이벤트가 일어났을 때만 실행
+      - main # main Branch에서 push 이벤트가 일어났을 때만 실행
 
 jobs:
   build:
@@ -15,7 +15,7 @@ jobs:
         id: npm-cache
         uses: actions/cache@v3
         with:
-          path: node_modules
+          path: '**/node_modules'
           key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
@@ -23,7 +23,7 @@ jobs:
 
       - name: Install
         if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
-        run: npm ci # node clean install
+        run: npm install
 
       - name: Lint
         run: npm run lint # eslint 실행
