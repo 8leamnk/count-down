@@ -49,6 +49,13 @@ function CountdownController() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isStart, time]);
 
+  useEffect(() => {
+    return () => {
+      removeTimeId();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Theme>
       <MainLayout>
