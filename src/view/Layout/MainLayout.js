@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 // style
@@ -24,4 +23,4 @@ function MainLayout({ children }) {
   );
 }
 
-export default React.memo(MainLayout);
+export default MainLayout;
