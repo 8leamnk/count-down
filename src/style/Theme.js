@@ -1,4 +1,3 @@
-import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 // style
@@ -20,4 +19,4 @@ function Theme({ children }) {
   );
 }
 
-export default React.memo(Theme);
+export default Theme;
