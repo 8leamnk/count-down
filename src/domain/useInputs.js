@@ -6,15 +6,12 @@ function useInputs() {
   const [inputs, setInputs] = useState(INITIAL_INPUTS);
 
   const resetInputs = useCallback(() => {
-    setInputs({ ...inputs, ...INITIAL_INPUTS });
-  }, [inputs]);
+    setInputs((curState) => ({ ...curState, ...INITIAL_INPUTS }));
+  }, []);
 
-  const onChange = useCallback(
-    (e) => {
-      setInputs({ ...inputs, [e.target.name]: e.target.value });
-    },
-    [inputs],
-  );
+  const onChange = useCallback((e) => {
+    setInputs((curState) => ({ ...curState, [e.target.name]: e.target.value }));
+  }, []);
 
   return { inputs, onChange, resetInputs };
 }
