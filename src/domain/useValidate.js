@@ -1,4 +1,6 @@
 import { useCallback } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { popupInfoState } from '../states/popup.states';
 import MESSAGE from '../constants/message';
 import VALUE from '../constants/value';
 
@@ -13,7 +15,9 @@ const ERROR_INFO = Object.freeze({
   title: 'ERROR',
 });
 
-function useValidate({ inputs, handlePopup }) {
+function useValidate({ inputs }) {
+  const setPopupInfo = useSetRecoilState(popupInfoState);
+
   const validateRange = useCallback((answer, type) => {
     const number = Number(answer);
     const range = RANGE[type];
@@ -25,8 +29,8 @@ function useValidate({ inputs, handlePopup }) {
     return number;
   }, []);
 
-  const calculateinitialTime = useCallback((inputsMap) => {
-    const [minutes, second] = [...inputsMap.values()];
+  const calculateinitialTime = useCallback((values) => {
+    const [minutes, second] = values;
     const initialTime = minutes * VALUE.timeUnit + second;
 
     return initialTime * VALUE.msUnit;
@@ -54,20 +58,20 @@ function useValidate({ inputs, handlePopup }) {
       inputsMap.set(type, number);
     });
 
-    return validateTotalTime(inputsMap);
+    return validateTotalTime([...inputsMap.values()]);
   }, [inputs, validateRange, validateTotalTime]);
 
-  const getInitialTime = () => {
+  const getInitialTime = useCallback(() => {
     try {
       return validate();
     } catch (error) {
-      handlePopup({
+      setPopupInfo({
         title: ERROR_INFO.title,
         description: error.message,
       });
       return ERROR_INFO.return;
     }
-  };
+  }, [validate, setPopupInfo]);
 
   return { getInitialTime };
 }

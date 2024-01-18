@@ -1,4 +1,5 @@
 import { act, fireEvent, render } from '@testing-library/react';
+import { RecoilRoot } from 'recoil';
 import CountdownController from '../CountdownController';
 
 describe('카운트다운 테스트', () => {
@@ -35,7 +36,11 @@ describe('카운트다운 테스트', () => {
     ];
 
     // when
-    const { getByText, getByLabelText } = render(<CountdownController />);
+    const { getByText, getByLabelText } = render(
+      <RecoilRoot>
+        <CountdownController />
+      </RecoilRoot>,
+    );
 
     // then
     allTexts.forEach((text) => {
@@ -55,7 +60,11 @@ describe('카운트다운 테스트', () => {
     const RANGE_ERROR = '최소 0분 1초, 최대 59분 59초의 시간을 입력해 주세요.';
 
     // when
-    const { getByText, getByLabelText } = render(<CountdownController />);
+    const { getByText, getByLabelText } = render(
+      <RecoilRoot>
+        <CountdownController />
+      </RecoilRoot>,
+    );
     const secondInput = getByLabelText(SECOND_REGEXP);
     const startBtn = getByText(START_BTN);
 
@@ -89,7 +98,11 @@ describe('카운트다운 테스트', () => {
     const SECOND_VALUE = '7';
 
     // when
-    const { getByLabelText } = render(<CountdownController />);
+    const { getByLabelText } = render(
+      <RecoilRoot>
+        <CountdownController />
+      </RecoilRoot>,
+    );
     const minutesInput = getByLabelText(MINUTES_REGEXP);
     const secondInput = getByLabelText(SECOND_REGEXP);
 
@@ -113,7 +126,9 @@ describe('카운트다운 테스트', () => {
 
     // when
     const { getByText, getByLabelText, queryByText } = render(
-      <CountdownController />,
+      <RecoilRoot>
+        <CountdownController />
+      </RecoilRoot>,
     );
     const minutesInput = getByLabelText(MINUTES_REGEXP);
     const secondInput = getByLabelText(SECOND_REGEXP);

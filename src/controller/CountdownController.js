@@ -2,7 +2,6 @@ import { useCallback, useEffect } from 'react';
 
 // model
 import useInputs from '../domain/useInputs';
-import usePopup from '../domain/usePopup';
 import useValidate from '../domain/useValidate';
 import useTime from '../domain/useTime';
 import useStart from '../domain/useStart';
@@ -21,8 +20,7 @@ import Theme from '../style/Theme';
 
 function CountdownController() {
   const { inputs, onChange, resetInputs } = useInputs();
-  const { popupOpened, popupInfo, handlePopup } = usePopup();
-  const { getInitialTime } = useValidate({ inputs, handlePopup });
+  const { getInitialTime } = useValidate({ inputs });
   const { time, handleTime, createTimeId, removeTimeId } = useTime();
   const { isStart, onStart, handleIsStart } = useStart({
     getInitialTime,
@@ -49,13 +47,6 @@ function CountdownController() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isStart, time]);
 
-  useEffect(() => {
-    return () => {
-      removeTimeId();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <Theme>
       <MainLayout>
@@ -70,11 +61,7 @@ function CountdownController() {
           onReset={onReset}
         />
       </MainLayout>
-      <Popup
-        popupOpened={popupOpened}
-        popupInfo={popupInfo}
-        handlePopup={handlePopup}
-      />
+      <Popup />
     </Theme>
   );
 }

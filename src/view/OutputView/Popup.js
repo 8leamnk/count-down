@@ -1,6 +1,8 @@
 import React from 'react';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import styled, { keyframes } from 'styled-components';
 import Button from '../Components/Button';
+import { popupInfoState, popupOpenedState } from '../../states/popup.states';
 
 // style
 const S = {};
@@ -72,15 +74,19 @@ S.ConfirmBtn = styled(Button)`
 
 const CONFIRM_BTN_TEXT = 'CONFIRM';
 
-function Popup({ popupOpened, popupInfo, handlePopup }) {
+function Popup() {
+  const popupOpened = useRecoilValue(popupOpenedState);
+  const popupInfo = useRecoilValue(popupInfoState);
+  const resetPopupInfo = useResetRecoilState(popupInfoState);
+
   if (popupOpened) {
     return (
-      <S.Wrapper onClick={() => handlePopup()}>
+      <S.Wrapper onClick={resetPopupInfo}>
         <S.Inner onClick={(e) => e.stopPropagation()}>
           <S.Title>{popupInfo.title}</S.Title>
           <S.Description>{popupInfo.description}</S.Description>
           <S.Confirm>
-            <S.ConfirmBtn onClick={() => handlePopup()}>
+            <S.ConfirmBtn onClick={resetPopupInfo}>
               {CONFIRM_BTN_TEXT}
             </S.ConfirmBtn>
           </S.Confirm>

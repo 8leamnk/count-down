@@ -1,10 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
-
-// layout
 import BoxLayout from '../Layout/BoxLayout';
-
-// constants
 import VALUE from '../../constants/value';
 
 // style

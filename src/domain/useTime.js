@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import VALUE from '../constants/value';
 
 function useTime() {
@@ -11,11 +11,18 @@ function useTime() {
     timeId.current = setInterval(() => {
       setTime((curState) => curState - VALUE.msUnit);
     }, VALUE.msUnit);
-  }, [timeId]);
+  }, []);
 
   const removeTimeId = useCallback(() => {
     clearTimeout(timeId.current);
     timeId.current = null;
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      removeTimeId();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { time, handleTime, createTimeId, removeTimeId };
