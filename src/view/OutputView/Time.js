@@ -1,6 +1,7 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import BoxLayout from '../Layout/BoxLayout';
+import useConvertToTime from '../../domain/useConvertToTime';
 import VALUE from '../../constants/value';
 
 // style
@@ -34,33 +35,16 @@ const OPTIONS = Object.freeze({
   radius: 20,
   height: 152,
 });
-const TENS_DIGIT = 10;
-const NUMERIC_SPACE = '0';
 
 function Time({ time }) {
   const disabled = useMemo(() => time === 0, [time]);
-
-  const displayTime = (number) => {
-    if (number >= TENS_DIGIT) {
-      return number;
-    }
-
-    return `${NUMERIC_SPACE}${number}`;
-  };
-
-  const printTime = useCallback(() => {
-    const totalTime = time / VALUE.msUnit;
-    const minutes = Math.floor(totalTime / VALUE.timeUnit);
-    const second = totalTime % VALUE.timeUnit;
-
-    return `${displayTime(minutes)}:${displayTime(second)}`;
-  }, [time]);
+  const { convertToTime } = useConvertToTime();
 
   return (
     <S.Wrapper>
       <BoxLayout {...OPTIONS}>
         <S.Clock $disabled={disabled} />
-        <S.Timer $disabled={disabled}>{printTime()}</S.Timer>
+        <S.Timer $disabled={disabled}>{convertToTime(time)}</S.Timer>
       </BoxLayout>
     </S.Wrapper>
   );
