@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
-import useValidate from '../useValidate';
+import useValidation from '../useValidation';
 
 const ERROR_RETURN = 0;
 
@@ -10,7 +10,7 @@ describe('입력값 유효성 검사 기능 테스트', () => {
     [{ minutes: '0', second: '-1' }],
   ])('각각 0 이상의 숫자를 입력하지 않으면 예외가 발생한다.', (inputs) => {
     // when
-    const { result } = renderHook((props) => useValidate(props), {
+    const { result } = renderHook((props) => useValidation(props), {
       wrapper: RecoilRoot,
       initialProps: { inputs },
     });
@@ -27,7 +27,7 @@ describe('입력값 유효성 검사 기능 테스트', () => {
     const INPUTS = { minutes: '0', second: '0' };
 
     // when
-    const { result } = renderHook((props) => useValidate(props), {
+    const { result } = renderHook((props) => useValidation(props), {
       wrapper: ({ children }) => <RecoilRoot>{children}</RecoilRoot>,
       initialProps: { inputs: INPUTS },
     });
@@ -45,7 +45,7 @@ describe('입력값 유효성 검사 기능 테스트', () => {
     const INPUTS = { minutes: '60', second: '0' };
 
     // when
-    const { result } = renderHook((props) => useValidate(props), {
+    const { result } = renderHook((props) => useValidation(props), {
       wrapper: ({ children }) => <RecoilRoot>{children}</RecoilRoot>,
       initialProps: { inputs: INPUTS },
     });
@@ -64,7 +64,7 @@ describe('입력값 유효성 검사 기능 테스트', () => {
     const OUTPUT = 90000;
 
     // when
-    const { result } = renderHook((props) => useValidate(props), {
+    const { result } = renderHook((props) => useValidation(props), {
       wrapper: ({ children }) => <RecoilRoot>{children}</RecoilRoot>,
       initialProps: { inputs: INPUTS },
     });

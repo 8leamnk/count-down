@@ -19,7 +19,7 @@ const ERROR_INFO = Object.freeze({
   title: 'ERROR',
 });
 
-function useValidate({ inputs }) {
+function useValidation({ inputs }) {
   const setPopupInfo = useSetRecoilState(popupInfoState);
 
   const validateRange = useCallback((type, answer) => {
@@ -86,4 +86,4 @@ function useValidate({ inputs }) {
   return { getInitialTime };
 }
 
-export default useValidate;
+export default useValidation;
