@@ -1,9 +1,13 @@
 import { useCallback } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { popupInfoState } from '../states/popup.states';
-import MESSAGE from '../constants/message';
 import VALUE from '../constants/value';
 
+const ERROR_MESSAGE = Object.freeze({
+  notNumber: '숫자만 입력해 주세요.',
+  rangeEach: '0 이상의 숫자를 입력해 주세요.',
+  rangeTotal: '최소 0분 1초, 최대 59분 59초의 시간을 입력해 주세요.',
+});
 const RANGE = Object.freeze({
   minutes: 0,
   second: 0,
@@ -18,48 +22,53 @@ const ERROR_INFO = Object.freeze({
 function useValidate({ inputs }) {
   const setPopupInfo = useSetRecoilState(popupInfoState);
 
-  const validateRange = useCallback((answer, type) => {
+  const validateRange = useCallback((type, answer) => {
     const number = Number(answer);
     const range = RANGE[type];
 
     if (!Number.isSafeInteger(range) || number < range) {
-      throw new Error(MESSAGE.error.rangeEach);
+      throw new Error(ERROR_MESSAGE.rangeEach);
     }
 
     return number;
   }, []);
 
-  const calculateinitialTime = useCallback((values) => {
-    const [minutes, second] = values;
-    const initialTime = minutes * VALUE.timeUnit + second;
+  const calculateInitialTime = useCallback((numbers) => {
+    const initialTime = numbers.reduce((acc, cur, index) => {
+      const exponent = numbers.length - index - 1;
+      const number = cur * VALUE.timeUnit ** exponent;
+
+      return acc + number;
+    }, 0);
 
     return initialTime * VALUE.msUnit;
   }, []);
 
-  const validateTotalTime = useCallback(
-    (inputsMap) => {
+  const validateInitialTime = useCallback(
+    (numbers) => {
       const { min, max } = RANGE;
-      const initialTime = calculateinitialTime(inputsMap);
+      const initialTime = calculateInitialTime(numbers);
 
       if (initialTime < min || initialTime > max) {
-        throw new Error(MESSAGE.error.rangeTotal);
+        throw new Error(ERROR_MESSAGE.rangeTotal);
       }
 
       return initialTime;
     },
-    [calculateinitialTime],
+    [calculateInitialTime],
   );
 
   const validate = useCallback(() => {
-    const inputsMap = new Map(Object.entries(inputs));
+    const numbers = [];
 
-    inputsMap.forEach((answer, type) => {
-      const number = validateRange(answer, type);
-      inputsMap.set(type, number);
+    Object.entries(inputs).forEach(([type, answer]) => {
+      const number = validateRange(type, answer);
+
+      numbers.push(number);
     });
 
-    return validateTotalTime([...inputsMap.values()]);
-  }, [inputs, validateRange, validateTotalTime]);
+    return validateInitialTime(numbers);
+  }, [inputs, validateRange, validateInitialTime]);
 
   const getInitialTime = useCallback(() => {
     try {
@@ -69,6 +78,7 @@ function useValidate({ inputs }) {
         title: ERROR_INFO.title,
         description: error.message,
       });
+
       return ERROR_INFO.return;
     }
   }, [validate, setPopupInfo]);
