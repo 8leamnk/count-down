@@ -12,12 +12,10 @@ describe('일시정지, 재시작 기능 테스트', () => {
     const TWICE = 2;
 
     // when
-    const { result } = renderHook((props) => usePause(props), {
-      initialProps: { createTimeId, removeTimeId },
-    });
+    const { result } = renderHook((props) => usePause(props));
 
     act(() => {
-      result.current.onPauseOrRestart();
+      result.current.handlePause(createTimeId, removeTimeId);
     });
 
     // then
@@ -27,7 +25,7 @@ describe('일시정지, 재시작 기능 테스트', () => {
 
     // when
     act(() => {
-      result.current.onPauseOrRestart();
+      result.current.handlePause(createTimeId, removeTimeId);
     });
 
     // then
@@ -37,7 +35,7 @@ describe('일시정지, 재시작 기능 테스트', () => {
 
     // when
     act(() => {
-      result.current.onPauseOrRestart();
+      result.current.handlePause(createTimeId, removeTimeId);
     });
 
     // then

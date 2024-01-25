@@ -14,12 +14,10 @@ describe('시작 기능 테스트', () => {
     getInitialTime.mockImplementationOnce(() => 0);
 
     // when
-    const { result } = renderHook((props) => useStart(props), {
-      initialProps: { getInitialTime, handleTime, createTimeId },
-    });
+    const { result } = renderHook((props) => useStart(props));
 
     act(() => {
-      result.current.onStart();
+      result.current.handleStart(getInitialTime, handleTime, createTimeId);
     });
 
     // then
@@ -36,12 +34,10 @@ describe('시작 기능 테스트', () => {
     getInitialTime.mockImplementationOnce(() => INITIAL_TIME);
 
     // when
-    const { result } = renderHook((props) => useStart(props), {
-      initialProps: { getInitialTime, handleTime, createTimeId },
-    });
+    const { result } = renderHook((props) => useStart(props));
 
     act(() => {
-      result.current.onStart();
+      result.current.handleStart(getInitialTime, handleTime, createTimeId);
     });
 
     // then

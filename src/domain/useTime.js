@@ -5,8 +5,6 @@ function useTime() {
   const timeId = useRef(null);
   const [time, setTime] = useState(0);
 
-  const handleTime = useCallback((ms) => setTime(ms), []);
-
   const createTimeId = useCallback(() => {
     timeId.current = setInterval(() => {
       setTime((curState) => curState - VALUE.msUnit);
@@ -18,6 +16,10 @@ function useTime() {
     timeId.current = null;
   }, []);
 
+  const handleTime = useCallback((timeToUpdate = 0) => {
+    setTime(timeToUpdate);
+  }, []);
+
   useEffect(() => {
     return () => {
       removeTimeId();
@@ -25,7 +27,7 @@ function useTime() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { time, handleTime, createTimeId, removeTimeId };
+  return { time, createTimeId, removeTimeId, handleTime };
 }
 
 export default useTime;

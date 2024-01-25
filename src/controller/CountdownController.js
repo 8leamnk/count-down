@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react';
 
 // model
 import useInputs from '../domain/useInputs';
-import useValidate from '../domain/useValidate';
+import useValidation from '../domain/useValidation';
 import useTime from '../domain/useTime';
 import useStart from '../domain/useStart';
 import usePause from '../domain/usePause';
@@ -20,25 +20,26 @@ import Theme from '../style/Theme';
 
 function CountdownController() {
   const { inputs, onChange, resetInputs } = useInputs();
-  const { getInitialTime } = useValidate({ inputs });
-  const { time, handleTime, createTimeId, removeTimeId } = useTime();
-  const { isStart, onStart, handleIsStart } = useStart({
-    getInitialTime,
-    handleTime,
-    createTimeId,
-  });
-  const { isPause, onPauseOrRestart, handlePause } = usePause({
-    createTimeId,
-    removeTimeId,
-  });
+  const { getInitialTime } = useValidation({ inputs });
+  const { time, createTimeId, removeTimeId, handleTime } = useTime();
+  const { isStart, handleStart, resetStart } = useStart();
+  const { isPause, handlePause, resetPause } = usePause();
+
+  const onStart = useCallback(() => {
+    handleStart(getInitialTime, handleTime, createTimeId);
+  }, [handleStart, getInitialTime, handleTime, createTimeId]);
+
+  const onPauseOrRestart = useCallback(() => {
+    handlePause(createTimeId, removeTimeId);
+  }, [handlePause, createTimeId, removeTimeId]);
 
   const onReset = useCallback(() => {
     resetInputs();
+    resetStart();
+    resetPause();
     handleTime(0);
-    handleIsStart(false);
-    handlePause(false);
     removeTimeId();
-  }, [resetInputs, handleTime, handleIsStart, handlePause, removeTimeId]);
+  }, [resetInputs, resetStart, resetPause, handleTime, removeTimeId]);
 
   useEffect(() => {
     if (isStart && !time) {
