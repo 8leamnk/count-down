@@ -5,7 +5,9 @@ const placeholderStyle = css`
   color: ${({ theme }) => `${theme.colors.gray003}`};
 `;
 
-const Input = styled.input`
+const S = {};
+
+S.Input = styled.input`
   width: 100%;
   height: 24px;
   font-family: 'Pretendard', sans-serif;
@@ -27,5 +29,9 @@ const Input = styled.input`
     ${placeholderStyle}
   }
 `;
+
+function Input({ children, ...rest }) {
+  return <S.Input {...rest} />;
+}
 
 export default Input;

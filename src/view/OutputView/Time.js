@@ -20,7 +20,7 @@ S.Clock = styled.img.attrs(({ $disabled }) => {
   };
 })``;
 
-S.Timer = styled.strong`
+S.Timer = styled.time`
   color: ${({ theme, $disabled }) =>
     $disabled ? theme.colors.gray005 : theme.colors.gray008};
   font-family: 'DS-Digital', sans-serif;

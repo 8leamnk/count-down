@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-const Button = styled.button`
+const S = {};
+
+S.Button = styled.button`
   height: 80px;
   display: flex;
   justify-content: center;
@@ -12,5 +14,9 @@ const Button = styled.button`
   color: ${({ theme }) => theme.colors.white};
   border-radius: 8px;
 `;
+
+function Button({ children, ...rest }) {
+  return <S.Button {...rest}>{children}</S.Button>;
+}
 
 export default Button;
