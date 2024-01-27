@@ -19,7 +19,7 @@ const ERROR_INFO = Object.freeze({
   title: 'ERROR',
 });
 
-function useValidation({ inputs }) {
+function useValidation() {
   const setPopupInfo = useSetRecoilState(popupInfoState);
 
   const validateRange = useCallback((type, answer) => {
@@ -58,30 +58,36 @@ function useValidation({ inputs }) {
     [calculateInitialTime],
   );
 
-  const validate = useCallback(() => {
-    const numbers = [];
+  const validate = useCallback(
+    (inputs) => {
+      const numbers = [];
 
-    Object.entries(inputs).forEach(([type, answer]) => {
-      const number = validateRange(type, answer);
+      Object.entries(inputs).forEach(([type, answer]) => {
+        const number = validateRange(type, answer);
 
-      numbers.push(number);
-    });
-
-    return validateInitialTime(numbers);
-  }, [inputs, validateRange, validateInitialTime]);
-
-  const getInitialTime = useCallback(() => {
-    try {
-      return validate();
-    } catch (error) {
-      setPopupInfo({
-        title: ERROR_INFO.title,
-        description: error.message,
+        numbers.push(number);
       });
 
-      return ERROR_INFO.return;
-    }
-  }, [validate, setPopupInfo]);
+      return validateInitialTime(numbers);
+    },
+    [validateRange, validateInitialTime],
+  );
+
+  const getInitialTime = useCallback(
+    (inputs) => {
+      try {
+        return validate(inputs);
+      } catch (error) {
+        setPopupInfo({
+          title: ERROR_INFO.title,
+          description: error.message,
+        });
+
+        return ERROR_INFO.return;
+      }
+    },
+    [validate, setPopupInfo],
+  );
 
   return { getInitialTime };
 }
