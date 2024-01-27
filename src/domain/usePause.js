@@ -3,10 +3,6 @@ import { useCallback, useState } from 'react';
 function usePause() {
   const [isPause, setIsPause] = useState(false);
 
-  const resetPause = useCallback(() => {
-    setIsPause(false);
-  }, []);
-
   const handlePause = useCallback(
     (createTimeId, removeTimeId) => {
       if (isPause) {
@@ -20,7 +16,11 @@ function usePause() {
     [isPause],
   );
 
-  return { isPause, handlePause, resetPause };
+  const resetIsPause = useCallback(() => {
+    setIsPause(false);
+  }, []);
+
+  return { isPause, handlePause, resetIsPause };
 }
 
 export default usePause;
