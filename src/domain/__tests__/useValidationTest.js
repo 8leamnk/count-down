@@ -11,12 +11,11 @@ describe('입력값 유효성 검사 기능 테스트', () => {
   ])('각각 0 이상의 숫자를 입력하지 않으면 예외가 발생한다.', (inputs) => {
     // when
     const { result } = renderHook((props) => useValidation(props), {
-      wrapper: RecoilRoot,
-      initialProps: { inputs },
+      wrapper: ({ children }) => <RecoilRoot>{children}</RecoilRoot>,
     });
 
     act(() => {
-      const initialTime = result.current.getInitialTime();
+      const initialTime = result.current.getInitialTime(inputs);
 
       expect(initialTime).toBe(ERROR_RETURN);
     });
@@ -29,12 +28,11 @@ describe('입력값 유효성 검사 기능 테스트', () => {
     // when
     const { result } = renderHook((props) => useValidation(props), {
       wrapper: ({ children }) => <RecoilRoot>{children}</RecoilRoot>,
-      initialProps: { inputs: INPUTS },
     });
 
     // then
     act(() => {
-      const initialTime = result.current.getInitialTime();
+      const initialTime = result.current.getInitialTime(INPUTS);
 
       expect(initialTime).toBe(ERROR_RETURN);
     });
@@ -47,12 +45,11 @@ describe('입력값 유효성 검사 기능 테스트', () => {
     // when
     const { result } = renderHook((props) => useValidation(props), {
       wrapper: ({ children }) => <RecoilRoot>{children}</RecoilRoot>,
-      initialProps: { inputs: INPUTS },
     });
 
     // then
     act(() => {
-      const initialTime = result.current.getInitialTime();
+      const initialTime = result.current.getInitialTime(INPUTS);
 
       expect(initialTime).toBe(ERROR_RETURN);
     });
@@ -66,12 +63,11 @@ describe('입력값 유효성 검사 기능 테스트', () => {
     // when
     const { result } = renderHook((props) => useValidation(props), {
       wrapper: ({ children }) => <RecoilRoot>{children}</RecoilRoot>,
-      initialProps: { inputs: INPUTS },
     });
 
     // then
     act(() => {
-      const initialTime = result.current.getInitialTime();
+      const initialTime = result.current.getInitialTime(INPUTS);
 
       expect(initialTime).toBe(OUTPUT);
     });

@@ -48,10 +48,7 @@ function Operation({ isStart, isPause, onStart, onPauseOrRestart, onReset }) {
         {BUTTON_TYPES.start}
       </S.StartBtn>
 
-      <S.PauseBtn
-        $isStart={isStart}
-        onClick={() => isStart && onPauseOrRestart()}
-      >
+      <S.PauseBtn $isStart={isStart} onClick={onPauseOrRestart}>
         {isPause ? BUTTON_TYPES.restart : BUTTON_TYPES.stop}
       </S.PauseBtn>
 

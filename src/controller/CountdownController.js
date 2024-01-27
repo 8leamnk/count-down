@@ -20,26 +20,32 @@ import Theme from '../style/Theme';
 
 function CountdownController() {
   const { inputs, onChange, resetInputs } = useInputs();
-  const { getInitialTime } = useValidation({ inputs });
+  const { getInitialTime } = useValidation();
   const { time, createTimeId, removeTimeId, handleTime } = useTime();
-  const { isStart, handleStart, resetStart } = useStart();
-  const { isPause, handlePause, resetPause } = usePause();
+  const { isStart, handleStart, resetIsStart } = useStart();
+  const { isPause, handlePause, resetIsPause } = usePause();
 
-  const onStart = useCallback(() => {
-    handleStart(getInitialTime, handleTime, createTimeId);
-  }, [handleStart, getInitialTime, handleTime, createTimeId]);
+  const onStart = () => {
+    if (!isStart) {
+      const initialTime = getInitialTime(inputs);
+
+      handleStart(initialTime, handleTime, createTimeId);
+    }
+  };
 
   const onPauseOrRestart = useCallback(() => {
-    handlePause(createTimeId, removeTimeId);
-  }, [handlePause, createTimeId, removeTimeId]);
+    if (isStart) {
+      handlePause(createTimeId, removeTimeId);
+    }
+  }, [isStart, handlePause, createTimeId, removeTimeId]);
 
-  const onReset = useCallback(() => {
+  const onReset = () => {
     resetInputs();
-    resetStart();
-    resetPause();
+    resetIsStart();
+    resetIsPause();
     handleTime(0);
     removeTimeId();
-  }, [resetInputs, resetStart, resetPause, handleTime, removeTimeId]);
+  };
 
   useEffect(() => {
     if (isStart && !time) {
