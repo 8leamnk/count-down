@@ -1,15 +1,26 @@
 name: React build
 on:
-  push:
-    branches:
-      - main # main Branch에서 push 이벤트가 일어났을 때만 실행
+  'push'
+  # push:
+  #   branches:
+  #     - main # main Branch에서 push 이벤트가 일어났을 때만 실행
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: ['18.x', '20.x']
+
     steps:
       - name: Checkout source code. # 레포지토리 체크아웃
         uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }} # node.js 버전 지정
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
 
       - name: Cache node modules # npm 캐시
         id: npm-cache
@@ -27,3 +38,6 @@ jobs:
 
       - name: Lint
         run: npm run lint # eslint 실행
+
+      - name: Test
+        run: npm test # test 실행
