@@ -1,10 +1,9 @@
 name: Project Test
 
 on:
-  push
-  # push:
-  #   branches:
-  #     - main # main Branch에서 push 이벤트가 일어났을 때만 실행
+  push:
+    branches:
+      - main # main Branch에서 push 이벤트가 일어났을 때만 실행
 
 jobs:
   test:
