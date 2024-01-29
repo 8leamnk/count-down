@@ -1,8 +1,8 @@
 import { act, renderHook } from '@testing-library/react';
 import useStart from '../useStart';
 
-const handleTime = jest.fn();
-const createTimeId = jest.fn();
+handleTime = jest.fn();
+createTimeId = jest.fn();
 
 describe('시작 기능 테스트', () => {
   test('시간 값이 0이면 카운트 다운을 시작하지 않는다.', () => {
@@ -21,6 +21,7 @@ describe('시작 기능 테스트', () => {
     // then
     expect(result.current.isStart).toBe(IS_START);
     expect(handleTime).toHaveBeenCalledTimes(CALLED_TIMES);
+    expect(createTimeId).toHaveBeenCalledTimes(CALLED_TIMES);
   });
 
   test('시간 값이 1000 이상이면 카운트 다운을 시작한다.', () => {
@@ -40,5 +41,6 @@ describe('시작 기능 테스트', () => {
     expect(result.current.isStart).toBe(IS_START);
     expect(handleTime).toHaveBeenCalledWith(INITIAL_TIME);
     expect(handleTime).toHaveBeenCalledTimes(CALLED_TIMES);
+    expect(createTimeId).toHaveBeenCalledTimes(CALLED_TIMES);
   });
 });
