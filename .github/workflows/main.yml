@@ -40,4 +40,4 @@ jobs:
         run: npm run lint # eslint 실행
 
       - name: Test
-        run: npm test # test 실행
+        run: npm run test # test 실행
