@@ -1,8 +1,8 @@
 import { act, renderHook } from '@testing-library/react';
 import useStart from '../useStart';
 
-handleTime = jest.fn();
-createTimeId = jest.fn();
+const handleTime = jest.fn();
+const createTimeId = jest.fn();
 
 describe('시작 기능 테스트', () => {
   test('시간 값이 0이면 카운트 다운을 시작하지 않는다.', () => {
