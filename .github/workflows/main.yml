@@ -1,12 +1,13 @@
-name: React build
+name: Project Test
+
 on:
-  'push'
+  push
   # push:
   #   branches:
   #     - main # main Branch에서 push 이벤트가 일어났을 때만 실행
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     strategy:
