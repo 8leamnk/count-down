@@ -3,7 +3,7 @@ import { RecoilRoot } from 'recoil';
 import CountdownController from '../CountdownController';
 
 describe('카운트다운 테스트', () => {
-  const MINUTES_REGEXP = /MINUTES/;
+  const MINUTE_REGEXP = /MINUTE/;
   const SECOND_REGEXP = /SECOND/;
   const START_BTN = /START/;
   const STOP_BTN = /STOP/;
@@ -25,7 +25,7 @@ describe('카운트다운 테스트', () => {
     const TITLE = /TIMER/;
     const SUBTITLE = [/COUNTDOWN/, /PROGRAM/];
     const INITIAL_TIME = /00:00/;
-    const LABELS = [MINUTES_REGEXP, SECOND_REGEXP];
+    const LABELS = [MINUTE_REGEXP, SECOND_REGEXP];
     const allTexts = [
       TITLE,
       ...SUBTITLE,
@@ -54,7 +54,7 @@ describe('카운트다운 테스트', () => {
 
   test('예외 테스트', () => {
     // given
-    const MINUTES_VALUE = '60';
+    const MINUTE_VALUE = '60';
     const SECOND_VALUE = '-7';
     const NUMBER_ERROR = '0 이상의 숫자를 입력해 주세요.';
     const RANGE_ERROR = '최소 0분 1초, 최대 59분 59초의 시간을 입력해 주세요.';
@@ -81,11 +81,11 @@ describe('카운트다운 테스트', () => {
     expect(getByText(NUMBER_ERROR)).toBeInTheDocument();
 
     // when
-    const minutesInput = getByLabelText(MINUTES_REGEXP);
+    const minuteInput = getByLabelText(MINUTE_REGEXP);
     const resetBtn = getByText(RESET_BTN);
 
     fireEvent.click(resetBtn);
-    fireEvent.change(minutesInput, { target: { value: MINUTES_VALUE } });
+    fireEvent.change(minuteInput, { target: { value: MINUTE_VALUE } });
     fireEvent.click(startBtn);
 
     // then
@@ -94,7 +94,7 @@ describe('카운트다운 테스트', () => {
 
   test('input, onChange 테스트', () => {
     // given
-    const MINUTES_VALUE = '1';
+    const MINUTE_VALUE = '1';
     const SECOND_VALUE = '7';
 
     // when
@@ -103,20 +103,20 @@ describe('카운트다운 테스트', () => {
         <CountdownController />
       </RecoilRoot>,
     );
-    const minutesInput = getByLabelText(MINUTES_REGEXP);
+    const minuteInput = getByLabelText(MINUTE_REGEXP);
     const secondInput = getByLabelText(SECOND_REGEXP);
 
-    fireEvent.change(minutesInput, { target: { value: MINUTES_VALUE } });
+    fireEvent.change(minuteInput, { target: { value: MINUTE_VALUE } });
     fireEvent.change(secondInput, { target: { value: SECOND_VALUE } });
 
     // then
-    expect(minutesInput.value).toBe(MINUTES_VALUE);
+    expect(minuteInput.value).toBe(MINUTE_VALUE);
     expect(secondInput.value).toBe(SECOND_VALUE);
   });
 
   test('카운트다운 동작 테스트', () => {
     // given
-    const MINUTES_VALUE = '0';
+    const MINUTE_VALUE = '0';
     const SECOND_VALUE = '67';
     const INITIAL_TIME = /00:00/;
     const SET_TIME = /01:07/;
@@ -130,13 +130,13 @@ describe('카운트다운 테스트', () => {
         <CountdownController />
       </RecoilRoot>,
     );
-    const minutesInput = getByLabelText(MINUTES_REGEXP);
+    const minuteInput = getByLabelText(MINUTE_REGEXP);
     const secondInput = getByLabelText(SECOND_REGEXP);
     const startBtn = getByText(START_BTN);
     const stopBtn = getByText(STOP_BTN);
     const resetBtn = getByText(RESET_BTN);
 
-    fireEvent.change(minutesInput, { target: { value: MINUTES_VALUE } });
+    fireEvent.change(minuteInput, { target: { value: MINUTE_VALUE } });
     fireEvent.change(secondInput, { target: { value: SECOND_VALUE } });
     fireEvent.click(startBtn);
 

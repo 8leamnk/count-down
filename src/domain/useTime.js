@@ -2,18 +2,18 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import VALUE from '../constants/value';
 
 function useTime() {
-  const timeId = useRef(null);
+  const intervalID = useRef(null);
   const [time, setTime] = useState(0);
 
   const createTimeId = useCallback(() => {
-    timeId.current = setInterval(() => {
+    intervalID.current = setInterval(() => {
       setTime((curState) => curState - VALUE.msUnit);
     }, VALUE.msUnit);
   }, []);
 
   const removeTimeId = useCallback(() => {
-    clearTimeout(timeId.current);
-    timeId.current = null;
+    clearTimeout(intervalID.current);
+    intervalID.current = null;
   }, []);
 
   const handleTime = useCallback((timeToUpdate = 0) => {
