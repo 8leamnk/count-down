@@ -94,10 +94,7 @@ function useValidation() {
       try {
         return validate(inputs);
       } catch (error) {
-        setPopupInfo({
-          title: ERROR_INFO.title,
-          description: error.message,
-        });
+        setPopupInfo({ title: ERROR_INFO.title, description: error.message });
 
         return ERROR_INFO.return;
       }
