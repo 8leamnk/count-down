@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-const INITIAL_INPUTS = Object.freeze({ minutes: '', second: '' });
+const INITIAL_INPUTS = Object.freeze({ minute: '', second: '' });
 
 function useInputs() {
   const [inputs, setInputs] = useState(INITIAL_INPUTS);

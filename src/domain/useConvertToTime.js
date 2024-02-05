@@ -16,10 +16,10 @@ function useConvertToTime() {
   const convertToTime = useCallback(
     (targetTime) => {
       const totalTime = targetTime / VALUE.msUnit;
-      const minutes = Math.floor(totalTime / VALUE.timeUnit);
+      const minute = Math.floor(totalTime / VALUE.timeUnit);
       const second = totalTime % VALUE.timeUnit;
 
-      return `${displayTime(minutes)}:${displayTime(second)}`;
+      return `${displayTime(minute)}:${displayTime(second)}`;
     },
     [displayTime],
   );
