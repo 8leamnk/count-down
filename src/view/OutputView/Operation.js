@@ -41,14 +41,14 @@ const BUTTON_TYPES = Object.freeze({
   reset: 'RESET',
 });
 
-function Operation({ isStart, isPause, onStart, onPauseOrRestart, onReset }) {
+function Operation({ isStart, isPause, onStart, onPause, onReset }) {
   return (
     <S.Wrapper>
       <S.StartBtn $isStart={isStart} onClick={onStart}>
         {BUTTON_TYPES.start}
       </S.StartBtn>
 
-      <S.PauseBtn $isStart={isStart} onClick={onPauseOrRestart}>
+      <S.PauseBtn $isStart={isStart} onClick={onPause}>
         {isPause ? BUTTON_TYPES.restart : BUTTON_TYPES.stop}
       </S.PauseBtn>
 
