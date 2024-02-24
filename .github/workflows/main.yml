@@ -34,7 +34,7 @@ jobs:
 
       - name: Install
         if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
-        run: npm install
+        run: npm ci
 
       - name: Lint
         run: npm run lint # eslint 실행
