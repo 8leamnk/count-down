@@ -3,9 +3,7 @@ import { useCallback, useEffect } from 'react';
 // model
 import useInputs from '../domain/useInputs';
 import useValidation from '../domain/useValidation';
-import useTime from '../domain/useTime';
-import useStart from '../domain/useStart';
-import usePause from '../domain/usePause';
+import useCountdown from '../domain/useCountdown';
 
 // view
 import MainLayout from '../view/Layout/MainLayout';
@@ -21,34 +19,29 @@ import Theme from '../style/Theme';
 function CountdownController() {
   const { inputs, onChange, resetInputs } = useInputs();
   const { getInitialTime } = useValidation();
-  const { time, createTimeId, removeTimeId, handleTime } = useTime();
-  const { isStart, handleStart, resetIsStart } = useStart();
-  const { isPause, handlePause, resetIsPause } = usePause();
+  const { time, isStart, isPause, handleStart, handlePause, handleReset } =
+    useCountdown();
 
-  const onStart = () => {
+  const onStart = useCallback(() => {
     if (!isStart) {
       const initialTime = getInitialTime(inputs);
-
-      handleStart(initialTime, handleTime, createTimeId);
+      handleStart(initialTime);
     }
-  };
+  }, [inputs, isStart, getInitialTime, handleStart]);
 
-  const onPauseOrRestart = useCallback(() => {
+  const onPause = useCallback(() => {
     if (isStart) {
-      handlePause(createTimeId, removeTimeId);
+      handlePause();
     }
-  }, [isStart, handlePause, createTimeId, removeTimeId]);
+  }, [isStart, handlePause]);
 
-  const onReset = () => {
+  const onReset = useCallback(() => {
     resetInputs();
-    resetIsStart();
-    resetIsPause();
-    handleTime(0);
-    removeTimeId();
-  };
+    handleReset();
+  }, [resetInputs, handleReset]);
 
   useEffect(() => {
-    if (isStart && !time) {
+    if (isStart && time === 0) {
       onReset();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -64,7 +57,7 @@ function CountdownController() {
           isStart={isStart}
           isPause={isPause}
           onStart={onStart}
-          onPauseOrRestart={onPauseOrRestart}
+          onPause={onPause}
           onReset={onReset}
         />
       </MainLayout>
