@@ -181,4 +181,39 @@ describe('카운트다운 테스트', () => {
     expect(stopBtn).toHaveStyle('background-color: #a8b1b2');
     expect(startBtn).toHaveStyle('background-color: #ff3215');
   });
+
+  test('카운트 다운 종료 시 리셋 함수의 자동 호출 테스트', () => {
+    // given
+    const MINUTE_VALUE = { first: '', last: '' };
+    const SECOND_VALUE = { first: '7', last: '' };
+    const INITIAL_TIME = /00:00/;
+    const SKIP_TIME = 7000;
+
+    // when
+    const { getByText, getByLabelText } = render(
+      <RecoilRoot>
+        <CountdownController />
+      </RecoilRoot>,
+    );
+    const minuteInput = getByLabelText(MINUTE_REGEXP);
+    const secondInput = getByLabelText(SECOND_REGEXP);
+    const startBtn = getByText(START_BTN);
+
+    fireEvent.change(secondInput, { target: { value: SECOND_VALUE.first } });
+    fireEvent.click(startBtn);
+
+    // then
+    expect(minuteInput.value).toBe(MINUTE_VALUE.first);
+    expect(secondInput.value).toBe(SECOND_VALUE.first);
+
+    // when
+    act(() => {
+      jest.advanceTimersByTime(SKIP_TIME);
+    });
+
+    // then
+    expect(minuteInput.value).toBe(MINUTE_VALUE.last);
+    expect(secondInput.value).toBe(SECOND_VALUE.last);
+    expect(getByText(INITIAL_TIME)).toBeInTheDocument();
+  });
 });
