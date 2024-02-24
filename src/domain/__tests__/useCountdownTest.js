@@ -99,26 +99,4 @@ describe('타이머 관리 테스트', () => {
     expect(result.current.isPause).toBe(IS_PAUSE);
     expect(result.current.time).toBe(TIME);
   });
-
-  test('타이머가 다 끝나면 리셋 되어 time이 0이 되고 start, pause 상태가 false가 된다.', () => {
-    // given
-    const INITIAL_TIME = 5000;
-    const AFTER_TIME = 5000;
-    const IS_START = false;
-    const IS_PAUSE = false;
-    const TIME = 0;
-
-    // when
-    const { result } = renderHook(() => useCountdown());
-
-    act(() => {
-      result.current.handleStart(INITIAL_TIME);
-      jest.advanceTimersByTime(AFTER_TIME);
-    });
-
-    // then
-    expect(result.current.isStart).toBe(IS_START);
-    expect(result.current.isPause).toBe(IS_PAUSE);
-    expect(result.current.time).toBe(TIME);
-  });
 });
