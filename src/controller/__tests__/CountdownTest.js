@@ -15,8 +15,9 @@ describe('카운트다운 테스트', () => {
   });
 
   afterEach(() => {
-    jest.runOnlyPendingTimers();
+    // 가짜 타이머를 사용하고 난 후 원래 타이머로 복원
     jest.useRealTimers();
+    // 타이머 제거
     jest.clearAllTimers();
   });
 
