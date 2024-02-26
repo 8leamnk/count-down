@@ -1,22 +1,22 @@
 import { useCallback, useEffect } from 'react';
 
-// model
-import useInputs from '../domain/useInputs';
-import useValidation from '../domain/useValidation';
-import useCountdown from '../domain/useCountdown';
+// hooks
+import useInputs from '../../hooks/useInputs';
+import useValidation from '../../hooks/useValidationTime';
+import useCountdown from '../../hooks/useCountdown';
 
-// view
-import MainLayout from '../view/Layout/MainLayout';
-import Title from '../view/OutputView/Title';
-import Time from '../view/OutputView/Time';
-import InputView from '../view/InputView';
-import Operation from '../view/OutputView/Operation';
-import Popup from '../view/OutputView/Popup';
+// components
+import MainLayout from '../../Components/Layout/MainLayout';
+import Title from '../../Components/Countdown/Title';
+import Time from '../../Components/Countdown/Time';
+import Input from '../../Components/Countdown/Input';
+import Operation from '../../Components/Countdown/Operation';
+import Popup from '../../Components/Countdown/Popup';
 
 // style
-import Theme from '../style/Theme';
+import Theme from '../../style/Theme';
 
-function CountdownController() {
+function Countdown() {
   const { inputs, onChange, resetInputs } = useInputs();
   const { getInitialTime } = useValidation();
   const { time, isStart, isPause, handleStart, handlePause, handleReset } =
@@ -52,7 +52,7 @@ function CountdownController() {
       <MainLayout>
         <Title />
         <Time time={time} />
-        <InputView inputs={inputs} onChange={onChange} />
+        <Input inputs={inputs} onChange={onChange} />
         <Operation
           isStart={isStart}
           isPause={isPause}
@@ -66,4 +66,4 @@ function CountdownController() {
   );
 }
 
-export default CountdownController;
+export default Countdown;

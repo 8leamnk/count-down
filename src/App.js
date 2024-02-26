@@ -1,10 +1,10 @@
 import { RecoilRoot } from 'recoil';
-import CountdownController from './controller/CountdownController';
+import Countdown from './Pages/Countdown';
 
 function App() {
   return (
     <RecoilRoot>
-      <CountdownController />
+      <Countdown />
     </RecoilRoot>
   );
 }

@@ -1,6 +1,6 @@
 import { act, fireEvent, render } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
-import CountdownController from '../CountdownController';
+import Countdown from '..';
 
 describe('카운트다운 테스트', () => {
   const MINUTE_REGEXP = /MINUTE/;
@@ -39,7 +39,7 @@ describe('카운트다운 테스트', () => {
     // when
     const { getByText, getByLabelText } = render(
       <RecoilRoot>
-        <CountdownController />
+        <Countdown />
       </RecoilRoot>,
     );
 
@@ -63,7 +63,7 @@ describe('카운트다운 테스트', () => {
     // when
     const { getByText, getByLabelText } = render(
       <RecoilRoot>
-        <CountdownController />
+        <Countdown />
       </RecoilRoot>,
     );
     const secondInput = getByLabelText(SECOND_REGEXP);
@@ -101,7 +101,7 @@ describe('카운트다운 테스트', () => {
     // when
     const { getByLabelText } = render(
       <RecoilRoot>
-        <CountdownController />
+        <Countdown />
       </RecoilRoot>,
     );
     const minuteInput = getByLabelText(MINUTE_REGEXP);
@@ -128,7 +128,7 @@ describe('카운트다운 테스트', () => {
     // when
     const { getByText, getByLabelText, queryByText } = render(
       <RecoilRoot>
-        <CountdownController />
+        <Countdown />
       </RecoilRoot>,
     );
     const minuteInput = getByLabelText(MINUTE_REGEXP);
@@ -192,7 +192,7 @@ describe('카운트다운 테스트', () => {
     // when
     const { getByText, getByLabelText } = render(
       <RecoilRoot>
-        <CountdownController />
+        <Countdown />
       </RecoilRoot>,
     );
     const minuteInput = getByLabelText(MINUTE_REGEXP);

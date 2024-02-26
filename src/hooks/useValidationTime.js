@@ -25,7 +25,7 @@ const ERROR_INFO = Object.freeze({
   title: 'ERROR',
 });
 
-function useValidation() {
+function useValidationTime() {
   const setPopupInfo = useSetRecoilState(popupInfoState);
 
   const convertToMap = useCallback((inputs) => {
@@ -105,4 +105,4 @@ function useValidation() {
   return { getInitialTime };
 }
 
-export default useValidation;
+export default useValidationTime;

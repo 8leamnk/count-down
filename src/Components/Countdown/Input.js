@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import BoxLayout from './Layout/BoxLayout';
-import Input from './Components/Input';
+import BoxLayout from '../Layout/BoxLayout';
+import Input from '../Common/Input';
 
 // style
 const S = {};

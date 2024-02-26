@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import BoxLayout from '../Layout/BoxLayout';
-import useConvertToTime from '../../domain/useConvertToTime';
+import useConvertToTime from '../../hooks/useConvertToTime';
 import VALUE from '../../constants/value';
 
 // style
