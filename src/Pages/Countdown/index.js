@@ -13,9 +13,6 @@ import Input from '../../Components/Countdown/Input';
 import Operation from '../../Components/Countdown/Operation';
 import Popup from '../../Components/Countdown/Popup';
 
-// style
-import Theme from '../../style/Theme';
-
 function Countdown() {
   const { inputs, onChange, resetInputs } = useInputs();
   const { getInitialTime } = useValidation();
@@ -48,7 +45,7 @@ function Countdown() {
   }, [isStart, time]);
 
   return (
-    <Theme>
+    <>
       <MainLayout>
         <Title />
         <Time time={time} />
@@ -62,7 +59,7 @@ function Countdown() {
         />
       </MainLayout>
       <Popup />
-    </Theme>
+    </>
   );
 }
 

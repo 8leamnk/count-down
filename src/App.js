@@ -1,10 +1,16 @@
+import { RouterProvider } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
-import Countdown from './Pages/Countdown';
+import router from './router';
+
+// style
+import Theme from './style/Theme';
 
 function App() {
   return (
     <RecoilRoot>
-      <Countdown />
+      <Theme>
+        <RouterProvider router={router} />
+      </Theme>
     </RecoilRoot>
   );
 }
