@@ -1,5 +1,6 @@
 import { act, fireEvent, render } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
+import Theme from '../../../style/Theme';
 import Countdown from '..';
 
 describe('카운트다운 테스트', () => {
@@ -39,7 +40,9 @@ describe('카운트다운 테스트', () => {
     // when
     const { getByText, getByLabelText } = render(
       <RecoilRoot>
-        <Countdown />
+        <Theme>
+          <Countdown />
+        </Theme>
       </RecoilRoot>,
     );
 
@@ -63,7 +66,9 @@ describe('카운트다운 테스트', () => {
     // when
     const { getByText, getByLabelText } = render(
       <RecoilRoot>
-        <Countdown />
+        <Theme>
+          <Countdown />
+        </Theme>
       </RecoilRoot>,
     );
     const secondInput = getByLabelText(SECOND_REGEXP);
@@ -101,7 +106,9 @@ describe('카운트다운 테스트', () => {
     // when
     const { getByLabelText } = render(
       <RecoilRoot>
-        <Countdown />
+        <Theme>
+          <Countdown />
+        </Theme>
       </RecoilRoot>,
     );
     const minuteInput = getByLabelText(MINUTE_REGEXP);
@@ -128,7 +135,9 @@ describe('카운트다운 테스트', () => {
     // when
     const { getByText, getByLabelText, queryByText } = render(
       <RecoilRoot>
-        <Countdown />
+        <Theme>
+          <Countdown />
+        </Theme>
       </RecoilRoot>,
     );
     const minuteInput = getByLabelText(MINUTE_REGEXP);
@@ -192,7 +201,9 @@ describe('카운트다운 테스트', () => {
     // when
     const { getByText, getByLabelText } = render(
       <RecoilRoot>
-        <Countdown />
+        <Theme>
+          <Countdown />
+        </Theme>
       </RecoilRoot>,
     );
     const minuteInput = getByLabelText(MINUTE_REGEXP);
