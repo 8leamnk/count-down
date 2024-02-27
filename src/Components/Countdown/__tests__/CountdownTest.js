@@ -1,6 +1,8 @@
 import { act, fireEvent, render } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
-import CountdownController from '../CountdownController';
+import Theme from '../../../style/Theme';
+import Popup from '../../Common/Popup';
+import Countdown from '..';
 
 describe('카운트다운 테스트', () => {
   const MINUTE_REGEXP = /MINUTE/;
@@ -15,8 +17,6 @@ describe('카운트다운 테스트', () => {
   });
 
   afterEach(() => {
-    // 가짜 타이머를 사용하고 난 후 원래 타이머로 복원
-    jest.useRealTimers();
     // 타이머 제거
     jest.clearAllTimers();
   });
@@ -39,7 +39,9 @@ describe('카운트다운 테스트', () => {
     // when
     const { getByText, getByLabelText } = render(
       <RecoilRoot>
-        <CountdownController />
+        <Theme>
+          <Countdown />
+        </Theme>
       </RecoilRoot>,
     );
 
@@ -63,7 +65,10 @@ describe('카운트다운 테스트', () => {
     // when
     const { getByText, getByLabelText } = render(
       <RecoilRoot>
-        <CountdownController />
+        <Theme>
+          <Countdown />
+          <Popup />
+        </Theme>
       </RecoilRoot>,
     );
     const secondInput = getByLabelText(SECOND_REGEXP);
@@ -101,7 +106,9 @@ describe('카운트다운 테스트', () => {
     // when
     const { getByLabelText } = render(
       <RecoilRoot>
-        <CountdownController />
+        <Theme>
+          <Countdown />
+        </Theme>
       </RecoilRoot>,
     );
     const minuteInput = getByLabelText(MINUTE_REGEXP);
@@ -128,7 +135,9 @@ describe('카운트다운 테스트', () => {
     // when
     const { getByText, getByLabelText, queryByText } = render(
       <RecoilRoot>
-        <CountdownController />
+        <Theme>
+          <Countdown />
+        </Theme>
       </RecoilRoot>,
     );
     const minuteInput = getByLabelText(MINUTE_REGEXP);
@@ -192,7 +201,9 @@ describe('카운트다운 테스트', () => {
     // when
     const { getByText, getByLabelText } = render(
       <RecoilRoot>
-        <CountdownController />
+        <Theme>
+          <Countdown />
+        </Theme>
       </RecoilRoot>,
     );
     const minuteInput = getByLabelText(MINUTE_REGEXP);

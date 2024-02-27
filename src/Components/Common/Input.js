@@ -30,7 +30,7 @@ S.Input = styled.input`
   }
 `;
 
-function Input({ children, ...rest }) {
+function Input({ className, ...rest }) {
   return <S.Input {...rest} />;
 }
 

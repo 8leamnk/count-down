@@ -1,10 +1,18 @@
+import { RouterProvider } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
-import CountdownController from './controller/CountdownController';
+import router from './router';
+import Popup from './Components/Common/Popup';
+
+// style
+import Theme from './style/Theme';
 
 function App() {
   return (
     <RecoilRoot>
-      <CountdownController />
+      <Theme>
+        <RouterProvider router={router} />
+        <Popup />
+      </Theme>
     </RecoilRoot>
   );
 }

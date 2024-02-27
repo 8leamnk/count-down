@@ -7,7 +7,6 @@ describe('타이머 관리 테스트', () => {
   });
 
   afterEach(() => {
-    jest.useRealTimers();
     jest.clearAllTimers();
   });
 
