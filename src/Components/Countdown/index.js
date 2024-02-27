@@ -6,12 +6,10 @@ import useValidation from '../../hooks/useValidationTime';
 import useCountdown from '../../hooks/useCountdown';
 
 // components
-import MainLayout from '../../Components/Layout/MainLayout';
-import Title from '../../Components/Countdown/Title';
-import Time from '../../Components/Countdown/Time';
-import Input from '../../Components/Countdown/Input';
-import Operation from '../../Components/Countdown/Operation';
-import Popup from '../../Components/Countdown/Popup';
+import Title from './Title';
+import Time from './Time';
+import Input from './Input';
+import Operation from './Operation';
 
 function Countdown() {
   const { inputs, onChange, resetInputs } = useInputs();
@@ -46,19 +44,16 @@ function Countdown() {
 
   return (
     <>
-      <MainLayout>
-        <Title />
-        <Time time={time} />
-        <Input inputs={inputs} onChange={onChange} />
-        <Operation
-          isStart={isStart}
-          isPause={isPause}
-          onStart={onStart}
-          onPause={onPause}
-          onReset={onReset}
-        />
-      </MainLayout>
-      <Popup />
+      <Title />
+      <Time time={time} />
+      <Input inputs={inputs} onChange={onChange} />
+      <Operation
+        isStart={isStart}
+        isPause={isPause}
+        onStart={onStart}
+        onPause={onPause}
+        onReset={onReset}
+      />
     </>
   );
 }
