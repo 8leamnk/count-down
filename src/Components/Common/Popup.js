@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import styled, { keyframes } from 'styled-components';
-import Button from '../Common/Button';
+import Button from './Button';
 import { popupInfoState, popupOpenedState } from '../../states/popup.states';
 
 // style
