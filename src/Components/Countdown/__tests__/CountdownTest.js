@@ -1,6 +1,7 @@
 import { act, fireEvent, render } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
 import Theme from '../../../style/Theme';
+import Popup from '../../Common/Popup';
 import Countdown from '..';
 
 describe('카운트다운 테스트', () => {
@@ -66,6 +67,7 @@ describe('카운트다운 테스트', () => {
       <RecoilRoot>
         <Theme>
           <Countdown />
+          <Popup />
         </Theme>
       </RecoilRoot>,
     );
