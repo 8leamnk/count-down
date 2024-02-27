@@ -1,7 +1,7 @@
 import { act, renderHook, waitFor } from '@testing-library/react';
 import useCountdown from '../useCountdown';
 
-describe('타이머 관리 테스트', () => {
+describe('카운트다운 주요 기능 테스트', () => {
   beforeEach(() => {
     jest.useFakeTimers();
   });
