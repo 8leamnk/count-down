@@ -1,8 +1,8 @@
 import React from 'react';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import styled, { keyframes } from 'styled-components';
-import Button from './Button';
 import { popupInfoState, popupOpenedState } from '../../states/popup.states';
+import Button from '../Atoms/Button';
 
 // style
 const S = {};

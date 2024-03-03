@@ -1,5 +1,5 @@
-import MainLayout from '../../Components/Layout/MainLayout';
-import Countdown from '../../Components/Countdown';
+import MainLayout from '../Layout/MainLayout';
+import Countdown from '../Organisms/Countdown';
 
 function Home() {
   return (

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import MainLayout from '../../Components/Layout/MainLayout';
-import Button from '../../Components/Common/Button';
+import MainLayout from '../Layout/MainLayout';
+import Button from '../Atoms/Button';
 
 // style
 const S = {};

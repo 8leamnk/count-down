@@ -6,10 +6,10 @@ import useValidation from '../../hooks/useValidationTime';
 import useCountdown from '../../hooks/useCountdown';
 
 // components
-import Title from './Title';
-import Time from './Time';
-import Input from './Input';
-import Operation from './Operation';
+import Title from '../Molecules/Title';
+import Time from '../Molecules/Time';
+import Input from '../Molecules/Input';
+import Operation from '../Molecules/Operation';
 
 function Countdown() {
   const { inputs, onChange, resetInputs } = useInputs();
