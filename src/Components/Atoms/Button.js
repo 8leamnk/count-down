@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 const S = {};
@@ -19,4 +20,4 @@ function Button({ children, ...rest }) {
   return <S.Button {...rest}>{children}</S.Button>;
 }
 
-export default Button;
+export default React.memo(Button);
