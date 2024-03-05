@@ -1,33 +1,15 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
-import BoxLayout from '../Layout/BoxLayout';
 import useConvertToTime from '../../hooks/useConvertToTime';
-import VALUE from '../../constants/value';
+import BoxLayout from '../Layout/BoxLayout';
+import Clock from '../Atoms/Clock';
+import ClockImage from '../Atoms/ClockImage';
 
 // style
 const S = {};
 
 S.Wrapper = styled.section`
   margin: 16px 0;
-`;
-
-S.Clock = styled.img.attrs(({ $disabled }) => {
-  return {
-    src: $disabled
-      ? `${VALUE.public}/assets/images/clock-disabled.svg`
-      : `${VALUE.public}/assets/images/clock.svg`,
-    alt: 'clock',
-  };
-})``;
-
-S.Timer = styled.time`
-  color: ${({ theme, $disabled }) =>
-    $disabled ? theme.colors.gray005 : theme.colors.gray008};
-  font-family: 'DS-Digital', sans-serif;
-  font-size: ${({ theme }) => `${theme.fontSize.title}px`};
-  font-weight: 700;
-  font-feature-settings: 'tnum';
-  font-variant-numeric: tabular-nums;
 `;
 
 const OPTIONS = Object.freeze({
@@ -43,8 +25,8 @@ function Time({ time }) {
   return (
     <S.Wrapper>
       <BoxLayout {...OPTIONS}>
-        <S.Clock $disabled={disabled} />
-        <S.Timer $disabled={disabled}>{convertToTime(time)}</S.Timer>
+        <ClockImage $disabled={disabled} />
+        <Clock $disabled={disabled}>{convertToTime(time)}</Clock>
       </BoxLayout>
     </S.Wrapper>
   );
