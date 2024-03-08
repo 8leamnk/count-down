@@ -1,11 +1,12 @@
+import React from 'react';
 import styled, { css } from 'styled-components';
+
+const S = {};
 
 const placeholderStyle = css`
   font-size: ${({ theme }) => `${theme.fontSize.base}px`};
   color: ${({ theme }) => `${theme.colors.gray003}`};
 `;
-
-const S = {};
 
 S.Input = styled.input`
   width: 100%;
@@ -30,8 +31,8 @@ S.Input = styled.input`
   }
 `;
 
-function Input({ className, ...rest }) {
+function Input({ ...rest }) {
   return <S.Input {...rest} />;
 }
 
-export default Input;
+export default React.memo(Input);

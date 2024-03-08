@@ -6,10 +6,10 @@ import useValidation from '../../hooks/useValidationTime';
 import useCountdown from '../../hooks/useCountdown';
 
 // components
-import Title from './Title';
-import Time from './Time';
-import Input from './Input';
-import Operation from './Operation';
+import Subject from '../Molecules/Subject';
+import Time from '../Molecules/Time';
+import Inputs from '../Molecules/Inputs';
+import Operation from '../Molecules/Operation';
 
 function Countdown() {
   const { inputs, onChange, resetInputs } = useInputs();
@@ -44,9 +44,9 @@ function Countdown() {
 
   return (
     <>
-      <Title />
+      <Subject title="TIMER" subTitle="COUNTDOWN\nPROGRAM" />
       <Time time={time} />
-      <Input inputs={inputs} onChange={onChange} />
+      <Inputs inputs={inputs} onChange={onChange} />
       <Operation
         isStart={isStart}
         isPause={isPause}
