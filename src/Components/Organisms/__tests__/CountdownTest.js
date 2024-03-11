@@ -2,7 +2,7 @@ import { act, fireEvent, render } from '@testing-library/react';
 import { RecoilRoot } from 'recoil';
 import Theme from '../../../style/Theme';
 import Countdown from '../Countdown';
-import Popup from '../../Templates/Popup';
+import Popup from '../../Molecules/Popup';
 
 describe('카운트다운 테스트', () => {
   const MINUTE_REGEXP = /MINUTE/;

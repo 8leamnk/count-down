@@ -1,7 +1,7 @@
 import { RouterProvider } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import router from './router';
-import Popup from './Components/Templates/Popup';
+import Popup from './Components/Molecules/Popup';
 
 // style
 import Theme from './style/Theme';
