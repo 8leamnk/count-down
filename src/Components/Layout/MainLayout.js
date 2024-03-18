@@ -3,7 +3,7 @@ import styled from 'styled-components';
 // style
 const S = {};
 
-S.Layout = styled.section`
+S.Layout = styled.main`
   width: 100%;
   height: 100vh;
   display: flex;
@@ -11,7 +11,7 @@ S.Layout = styled.section`
   align-items: center;
 `;
 
-S.Inner = styled.main`
+S.Inner = styled.section`
   width: 416px;
 `;
 
