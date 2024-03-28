@@ -1,12 +1,7 @@
-import MainLayout from '../Layout/MainLayout';
-import Countdown from '../Organisms/Countdown';
+import CountdownTemplate from '../Templates/CountdownTemplate';
 
 function Home() {
-  return (
-    <MainLayout>
-      <Countdown />
-    </MainLayout>
-  );
+  return <CountdownTemplate />;
 }
 
 export default Home;

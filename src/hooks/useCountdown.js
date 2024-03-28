@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import VALUE from '../constants/value';
 
 function useCountdown() {
@@ -7,29 +7,26 @@ function useCountdown() {
   const [isStart, setIsStart] = useState(false);
   const [isPause, setIsPause] = useState(false);
 
-  const createTimer = useCallback(() => {
+  const createTimer = () => {
     intervalID.current = setInterval(() => {
       setTime((curState) => curState - VALUE.msUnit);
     }, VALUE.msUnit);
-  }, []);
+  };
 
-  const removeTimer = useCallback(() => {
+  const removeTimer = () => {
     clearTimeout(intervalID.current);
     intervalID.current = null;
-  }, []);
+  };
 
-  const handleStart = useCallback(
-    (initialTime) => {
-      if (initialTime > 0) {
-        setIsStart(true);
-        setTime(initialTime);
-        createTimer();
-      }
-    },
-    [createTimer],
-  );
+  const handleStart = (initialTime) => {
+    if (initialTime > 0) {
+      setIsStart(true);
+      setTime(initialTime);
+      createTimer();
+    }
+  };
 
-  const handlePause = useCallback(() => {
+  const handlePause = () => {
     if (isPause) {
       setIsPause(false);
       createTimer();
@@ -37,14 +34,14 @@ function useCountdown() {
       setIsPause(true);
       removeTimer();
     }
-  }, [isPause, createTimer, removeTimer]);
+  };
 
-  const handleReset = useCallback(() => {
+  const handleReset = () => {
     setIsStart(false);
     setIsPause(false);
     setTime(0);
     removeTimer();
-  }, [removeTimer]);
+  };
 
   useEffect(() => {
     return () => {
