@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 
 // hooks
 import useInputs from '../../hooks/useInputs';
@@ -17,23 +17,23 @@ function Countdown() {
   const { time, isStart, isPause, handleStart, handlePause, handleReset } =
     useCountdown();
 
-  const onStart = useCallback(() => {
+  const onStart = () => {
     if (!isStart) {
       const initialTime = getInitialTime(inputs);
       handleStart(initialTime);
     }
-  }, [inputs, isStart, getInitialTime, handleStart]);
+  };
 
-  const onPause = useCallback(() => {
+  const onPause = () => {
     if (isStart) {
       handlePause();
     }
-  }, [isStart, handlePause]);
+  };
 
-  const onReset = useCallback(() => {
+  const onReset = () => {
     resetInputs();
     handleReset();
-  }, [resetInputs, handleReset]);
+  };
 
   useEffect(() => {
     if (isStart && time === 0) {
