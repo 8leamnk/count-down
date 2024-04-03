@@ -1,9 +1,8 @@
-name: Project Test
+name: CI
 
 on:
   push:
-    branches:
-      - main # main Branch에서 push 이벤트가 일어났을 때만 실행
+    branches: ['main', 'dev', 'release/**']
 
 jobs:
   test:
@@ -20,7 +19,7 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }} # node.js 버전 지정
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ matrix.node-version }} # 또는 '20.x' 하나만 해도 무방
 
       - name: Cache node modules # npm 캐시
         id: npm-cache
@@ -36,8 +35,11 @@ jobs:
         if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
         run: npm ci
 
-      - name: Lint
-        run: npm run lint # eslint 실행
+      - name: Build
+        run: npm run build
 
       - name: Test
-        run: npm run test # test 실행
+        run: npm run test
+
+      - name: Lint
+        run: npm run lint
