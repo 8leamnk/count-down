@@ -14,8 +14,8 @@ S.Clock = styled.img.attrs(({ $disabled }) => {
   };
 })``;
 
-function ClockImage(props) {
-  return <S.Clock {...props} />;
+function ClockImage({ disabled, ...rest }) {
+  return <S.Clock $disabled={disabled} {...rest} />;
 }
 
 export default React.memo(ClockImage);

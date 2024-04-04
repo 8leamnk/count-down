@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import useConvertToTime from '../../hooks/useConvertToTime';
 import BoxLayout from '../Layout/BoxLayout';
@@ -19,14 +19,14 @@ const OPTIONS = Object.freeze({
 });
 
 function Time({ time }) {
-  const disabled = useMemo(() => time === 0, [time]);
   const { convertToTime } = useConvertToTime();
+  const disabled = time === 0;
 
   return (
     <S.Wrapper>
       <BoxLayout {...OPTIONS}>
-        <ClockImage $disabled={disabled} />
-        <Clock $disabled={disabled}>{convertToTime(time)}</Clock>
+        <ClockImage disabled={disabled} />
+        <Clock disabled={disabled}>{convertToTime(time)}</Clock>
       </BoxLayout>
     </S.Wrapper>
   );
