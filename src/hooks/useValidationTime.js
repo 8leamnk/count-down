@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { popupInfoState } from '../states/popup.states';
 import VALUE from '../constants/value';
@@ -28,7 +27,7 @@ const ERROR_INFO = Object.freeze({
 function useValidationTime() {
   const setPopupInfo = useSetRecoilState(popupInfoState);
 
-  const convertToMap = useCallback((inputs) => {
+  const convertToMap = (inputs) => {
     const inputMap = new Map([...TIME_MAP]);
 
     Object.entries(inputs).forEach(([type, answer]) => {
@@ -40,17 +39,17 @@ function useValidationTime() {
     });
 
     return inputMap;
-  }, []);
+  };
 
-  const validateRange = useCallback((key, number) => {
+  const validateRange = (key, number) => {
     const range = RANGE[key];
 
     if (!Number.isSafeInteger(range) || number < range) {
       throw new Error(ERROR_MESSAGE.rangeEach);
     }
-  }, []);
+  };
 
-  const calculateInitialTime = useCallback((inputMap) => {
+  const calculateInitialTime = (inputMap) => {
     let initialTime = 0;
     let exponent = inputMap.size - 1;
 
@@ -60,47 +59,38 @@ function useValidationTime() {
     });
 
     return initialTime;
-  }, []);
+  };
 
-  const validateInitialTime = useCallback(
-    (inputMap) => {
-      const { min, max } = RANGE;
-      const initialTime = calculateInitialTime(inputMap);
+  const validateInitialTime = (inputMap) => {
+    const { min, max } = RANGE;
+    const initialTime = calculateInitialTime(inputMap);
 
-      if (initialTime < min || initialTime > max) {
-        throw new Error(ERROR_MESSAGE.rangeTotal);
-      }
+    if (initialTime < min || initialTime > max) {
+      throw new Error(ERROR_MESSAGE.rangeTotal);
+    }
 
-      return initialTime * VALUE.msUnit;
-    },
-    [calculateInitialTime],
-  );
+    return initialTime * VALUE.msUnit;
+  };
 
-  const validate = useCallback(
-    (inputs) => {
-      const inputMap = convertToMap(inputs);
+  const validate = (inputs) => {
+    const inputMap = convertToMap(inputs);
 
-      inputMap.forEach((number, key) => {
-        validateRange(key, number);
-      });
+    inputMap.forEach((number, key) => {
+      validateRange(key, number);
+    });
 
-      return validateInitialTime(inputMap);
-    },
-    [convertToMap, validateRange, validateInitialTime],
-  );
+    return validateInitialTime(inputMap);
+  };
 
-  const getInitialTime = useCallback(
-    (inputs) => {
-      try {
-        return validate(inputs);
-      } catch (error) {
-        setPopupInfo({ title: ERROR_INFO.title, description: error.message });
+  const getInitialTime = (inputs) => {
+    try {
+      return validate(inputs);
+    } catch (error) {
+      setPopupInfo({ title: ERROR_INFO.title, description: error.message });
 
-        return ERROR_INFO.return;
-      }
-    },
-    [validate, setPopupInfo],
-  );
+      return ERROR_INFO.return;
+    }
+  };
 
   return { getInitialTime };
 }

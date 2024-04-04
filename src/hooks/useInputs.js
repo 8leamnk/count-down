@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 const INITIAL_INPUTS = Object.freeze({ minute: '', second: '' });
 
@@ -9,9 +9,9 @@ function useInputs() {
     setInputs((curState) => ({ ...curState, ...INITIAL_INPUTS }));
   };
 
-  const onChange = (e) => {
+  const onChange = useCallback((e) => {
     setInputs((curState) => ({ ...curState, [e.target.name]: e.target.value }));
-  };
+  }, []);
 
   return { inputs, onChange, resetInputs };
 }

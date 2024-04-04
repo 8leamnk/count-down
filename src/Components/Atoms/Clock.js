@@ -14,8 +14,12 @@ S.Clock = styled.time`
   font-variant-numeric: tabular-nums;
 `;
 
-function Clock({ children, ...rest }) {
-  return <S.Clock {...rest}>{children}</S.Clock>;
+function Clock({ disabled, children, ...rest }) {
+  return (
+    <S.Clock $disabled={disabled} {...rest}>
+      {children}
+    </S.Clock>
+  );
 }
 
 export default React.memo(Clock);
