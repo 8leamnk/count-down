@@ -1,11 +1,15 @@
 import MainLayout from '../Layout/MainLayout';
 import Countdown from '../Organisms/Countdown';
+import Slider from '../Organisms/Slider';
 
 function CountdownTemplate() {
   return (
-    <MainLayout>
-      <Countdown />
-    </MainLayout>
+    <>
+      <Slider />
+      <MainLayout>
+        <Countdown />
+      </MainLayout>
+    </>
   );
 }
 
