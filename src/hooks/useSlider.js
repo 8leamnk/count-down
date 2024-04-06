@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useAnimation } from 'framer-motion';
 
-function useSlide({ ref, size, rate, autoTimer, timer }) {
+function useSlider({ ref, size, rate, autoTimer, timer }) {
   const animation = useAnimation();
   const intervalId = useRef(null);
   const [rect, setRect] = useState({});
@@ -77,4 +77,4 @@ function useSlide({ ref, size, rate, autoTimer, timer }) {
   return { animation, index, handleDragEnd };
 }
 
-export default useSlide;
+export default useSlider;

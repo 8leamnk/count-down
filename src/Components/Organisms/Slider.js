@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import useSlide from '../../hooks/useSlide';
+import useSlider from '../../hooks/useSlider';
 
 // style
 const S = {};
@@ -44,7 +44,7 @@ function Slider({
   timer = 5000,
 }) {
   const ref = useRef();
-  const { animation, index, handleDragEnd } = useSlide({
+  const { animation, index, handleDragEnd } = useSlider({
     ref,
     size: data.length,
     rate,
