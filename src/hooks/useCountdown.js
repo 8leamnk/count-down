@@ -14,7 +14,7 @@ function useCountdown() {
   };
 
   const removeTimer = () => {
-    clearTimeout(intervalID.current);
+    clearInterval(intervalID.current);
     intervalID.current = null;
   };
 
