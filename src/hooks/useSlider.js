@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef, useState } from 'react';
 import { useAnimation } from 'framer-motion';
 
@@ -5,6 +6,7 @@ function useSlider({ ref, size, rate, autoTimer, timer }) {
   const animation = useAnimation();
   const intervalId = useRef(null);
   const [rect, setRect] = useState({});
+  const [swipeNumber, setSwipeNumber] = useState(0);
   const [index, setIndex] = useState({
     prev: size - 1,
     curr: 0,
@@ -19,13 +21,8 @@ function useSlider({ ref, size, rate, autoTimer, timer }) {
     return ((((value - min) % rangeSize) + rangeSize) % rangeSize) + min;
   };
 
-  const changeIndex = (dir) => {
-    const currToUpdate = index.curr + dir;
-    const prev = calculateIndex(currToUpdate - 1);
-    const curr = calculateIndex(currToUpdate);
-    const next = calculateIndex(currToUpdate + 1);
-
-    setIndex((curState) => ({ ...curState, prev, curr, next }));
+  const changeSwipeNumber = (dir) => {
+    setSwipeNumber((curState) => curState + dir);
   };
 
   const swipePower = (offset, absDistance) => (offset / absDistance) * 100;
@@ -35,10 +32,10 @@ function useSlider({ ref, size, rate, autoTimer, timer }) {
 
     if (power > rate) {
       await animation.start('toRight');
-      changeIndex(-1);
+      changeSwipeNumber(-1);
     } else if (power < -rate) {
       await animation.start('toLeft');
-      changeIndex(1);
+      changeSwipeNumber(1);
     }
   };
 
@@ -52,7 +49,7 @@ function useSlider({ ref, size, rate, autoTimer, timer }) {
     if (autoTimer) {
       intervalId.current = setInterval(async () => {
         await animation.start('toLeft');
-        changeIndex(1);
+        changeSwipeNumber(1);
       }, timer);
     }
   };
@@ -65,13 +62,20 @@ function useSlider({ ref, size, rate, autoTimer, timer }) {
   };
 
   useEffect(() => {
+    const prev = calculateIndex(swipeNumber - 1);
+    const curr = calculateIndex(swipeNumber);
+    const next = calculateIndex(swipeNumber + 1);
+
+    setIndex((curState) => ({ ...curState, prev, curr, next }));
+  }, [swipeNumber]);
+
+  useEffect(() => {
     getRefInfo();
     startTimer();
 
     return () => {
       clearTimer();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { animation, index, handleDragEnd };
