@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 // style
@@ -32,4 +31,4 @@ function BoxLayout({ children, ...options }) {
   );
 }
 
-export default React.memo(BoxLayout);
+export default BoxLayout;

@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import VALUE from '../../constants/value';
 
@@ -18,4 +17,4 @@ function ClockImage({ disabled, ...rest }) {
   return <S.Clock $disabled={disabled} {...rest} />;
 }
 
-export default React.memo(ClockImage);
+export default ClockImage;

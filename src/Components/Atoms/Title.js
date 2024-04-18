@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 // style
@@ -15,4 +14,4 @@ function Title({ children, ...rest }) {
   return <S.Title {...rest}>{children}</S.Title>;
 }
 
-export default React.memo(Title);
+export default Title;

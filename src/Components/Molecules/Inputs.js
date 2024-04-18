@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import BoxLayout from '../Layout/BoxLayout';
 import Label from '../Atoms/Label';
@@ -39,4 +38,4 @@ function Inputs({ inputs, onChange }) {
   );
 }
 
-export default React.memo(Inputs);
+export default Inputs;

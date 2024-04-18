@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 // style
@@ -15,4 +14,4 @@ function Description({ children, ...rest }) {
   return <S.Description {...rest}>{children}</S.Description>;
 }
 
-export default React.memo(Description);
+export default Description;

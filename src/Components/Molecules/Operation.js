@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import Button from '../Atoms/Button';
 
@@ -57,4 +56,4 @@ function Operation({ isStart, isPause, onStart, onPause, onReset }) {
   );
 }
 
-export default React.memo(Operation);
+export default Operation;

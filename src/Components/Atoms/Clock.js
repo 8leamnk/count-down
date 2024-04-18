@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 // style
@@ -22,4 +21,4 @@ function Clock({ disabled, children, ...rest }) {
   );
 }
 
-export default React.memo(Clock);
+export default Clock;
