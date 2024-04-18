@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 // style
@@ -14,4 +13,4 @@ function SubTitle({ children, ...rest }) {
   return <S.SubTitle {...rest}>{children}</S.SubTitle>;
 }
 
-export default React.memo(SubTitle);
+export default SubTitle;

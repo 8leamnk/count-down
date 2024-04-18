@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 // style
@@ -25,4 +24,4 @@ function Label({ labelText, children, ...rest }) {
   );
 }
 
-export default React.memo(Label);
+export default Label;

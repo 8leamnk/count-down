@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { css } from 'styled-components';
 
 const S = {};
@@ -35,4 +34,4 @@ function Input({ ...rest }) {
   return <S.Input {...rest} />;
 }
 
-export default React.memo(Input);
+export default Input;

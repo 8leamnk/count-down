@@ -1,4 +1,3 @@
-import React from 'react';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { popupInfoState, popupOpenedState } from '../../states/popup.states';
@@ -52,4 +51,4 @@ function Popup() {
   return '';
 }
 
-export default React.memo(Popup);
+export default Popup;
