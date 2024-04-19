@@ -1,10 +1,10 @@
-import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import styled from 'styled-components';
-import { popupInfoState, popupOpenedState } from '../../states/popup.states';
 import PopupLayout from '../Layout/PopupLayout';
 import Title from '../Atoms/Title';
 import Description from '../Atoms/Description';
 import Button from '../Atoms/Button';
+import { POPUP_INFO_KEY, POPUP_OPENED_KEY } from '../../constants/queryKeys';
 
 // style
 const S = {};
@@ -30,9 +30,23 @@ S.ConfirmBtn = styled(Button)`
 `;
 
 function Popup() {
-  const popupOpened = useRecoilValue(popupOpenedState);
-  const popupInfo = useRecoilValue(popupInfoState);
-  const resetPopupInfo = useResetRecoilState(popupInfoState);
+  const queryClient = useQueryClient();
+
+  const { data: popupInfo } = useQuery({
+    queryKey: [POPUP_INFO_KEY],
+    initialData: { title: '', description: '' },
+    staleTime: Infinity,
+  });
+
+  const { data: popupOpened } = useQuery({
+    queryKey: [POPUP_OPENED_KEY, popupInfo],
+    initialData: popupInfo.title !== '' && popupInfo.description !== '',
+    staleTime: Infinity,
+  });
+
+  const resetPopupInfo = () => {
+    queryClient.resetQueries({ queryKey: [POPUP_INFO_KEY], exact: true });
+  };
 
   if (popupOpened) {
     return (

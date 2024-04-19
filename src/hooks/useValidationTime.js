@@ -1,6 +1,6 @@
-import { useSetRecoilState } from 'recoil';
-import { popupInfoState } from '../states/popup.states';
+import { useQueryClient } from '@tanstack/react-query';
 import VALUE from '../constants/value';
+import { POPUP_INFO_KEY } from '../constants/queryKeys';
 
 const TIME_MAP = new Map([
   ['hour', 0],
@@ -25,7 +25,7 @@ const ERROR_INFO = Object.freeze({
 });
 
 function useValidationTime() {
-  const setPopupInfo = useSetRecoilState(popupInfoState);
+  const queryClient = useQueryClient();
 
   const convertToMap = (inputs) => {
     const inputMap = new Map([...TIME_MAP]);
@@ -86,7 +86,10 @@ function useValidationTime() {
     try {
       return validate(inputs);
     } catch (error) {
-      setPopupInfo({ title: ERROR_INFO.title, description: error.message });
+      queryClient.setQueryData([POPUP_INFO_KEY], {
+        title: ERROR_INFO.title,
+        description: error.message,
+      });
 
       return ERROR_INFO.return;
     }

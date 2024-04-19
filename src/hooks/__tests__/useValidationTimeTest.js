@@ -1,16 +1,22 @@
 import { act, renderHook } from '@testing-library/react';
-import { RecoilRoot } from 'recoil';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import useValidationTime from '../useValidationTime';
 
 const ERROR_RETURN = 0;
 
 describe('입력값 유효성 검사 기능 테스트', () => {
+  const queryClient = new QueryClient();
+
   test.each([[{ minute: '-1', second: '0' }], [{ minute: '0', second: '-1' }]])(
     '각각 0 이상의 숫자를 입력하지 않으면 예외가 발생한다.',
     (inputs) => {
       // when
       const { result } = renderHook((props) => useValidationTime(props), {
-        wrapper: ({ children }) => <RecoilRoot>{children}</RecoilRoot>,
+        wrapper: ({ children }) => (
+          <QueryClientProvider client={queryClient}>
+            {children}
+          </QueryClientProvider>
+        ),
       });
 
       act(() => {
@@ -27,7 +33,11 @@ describe('입력값 유효성 검사 기능 테스트', () => {
 
     // when
     const { result } = renderHook((props) => useValidationTime(props), {
-      wrapper: ({ children }) => <RecoilRoot>{children}</RecoilRoot>,
+      wrapper: ({ children }) => (
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
+      ),
     });
 
     // then
@@ -44,7 +54,11 @@ describe('입력값 유효성 검사 기능 테스트', () => {
 
     // when
     const { result } = renderHook((props) => useValidationTime(props), {
-      wrapper: ({ children }) => <RecoilRoot>{children}</RecoilRoot>,
+      wrapper: ({ children }) => (
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
+      ),
     });
 
     // then
@@ -62,7 +76,11 @@ describe('입력값 유효성 검사 기능 테스트', () => {
 
     // when
     const { result } = renderHook((props) => useValidationTime(props), {
-      wrapper: ({ children }) => <RecoilRoot>{children}</RecoilRoot>,
+      wrapper: ({ children }) => (
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
+      ),
     });
 
     // then

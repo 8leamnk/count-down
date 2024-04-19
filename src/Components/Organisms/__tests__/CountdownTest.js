@@ -1,7 +1,7 @@
 import { act, fireEvent, render } from '@testing-library/react';
-import { RecoilRoot } from 'recoil';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Theme from '../../../style/Theme';
-import Countdown from '../Countdown';
+import CountdownTemplate from '../../Templates/CountdownTemplate';
 import Popup from '../../Molecules/Popup';
 
 describe('카운트다운 테스트', () => {
@@ -11,6 +11,7 @@ describe('카운트다운 테스트', () => {
   const STOP_BTN = /STOP/;
   const RESTART_BTN = /RESTART/;
   const RESET_BTN = /RESET/;
+  const queryClient = new QueryClient();
 
   beforeEach(() => {
     jest.useFakeTimers();
@@ -38,11 +39,11 @@ describe('카운트다운 테스트', () => {
 
     // when
     const { getByText, getByLabelText } = render(
-      <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
         <Theme>
-          <Countdown />
+          <CountdownTemplate />
         </Theme>
-      </RecoilRoot>,
+      </QueryClientProvider>,
     );
 
     // then
@@ -64,14 +65,13 @@ describe('카운트다운 테스트', () => {
 
     // when
     const { getByText, getByLabelText } = render(
-      <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
         <Theme>
-          <Countdown />
+          <CountdownTemplate />
           <Popup />
         </Theme>
-      </RecoilRoot>,
+      </QueryClientProvider>,
     );
-    const secondInput = getByLabelText(SECOND_REGEXP);
     const startBtn = getByText(START_BTN);
 
     fireEvent.click(startBtn);
@@ -80,6 +80,8 @@ describe('카운트다운 테스트', () => {
     expect(getByText(RANGE_ERROR)).toBeInTheDocument();
 
     // when
+    const secondInput = getByLabelText(SECOND_REGEXP);
+
     fireEvent.change(secondInput, { target: { value: SECOND_VALUE } });
     fireEvent.click(startBtn);
 
@@ -105,11 +107,11 @@ describe('카운트다운 테스트', () => {
 
     // when
     const { getByLabelText } = render(
-      <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
         <Theme>
-          <Countdown />
+          <CountdownTemplate />
         </Theme>
-      </RecoilRoot>,
+      </QueryClientProvider>,
     );
     const minuteInput = getByLabelText(MINUTE_REGEXP);
     const secondInput = getByLabelText(SECOND_REGEXP);
@@ -134,11 +136,11 @@ describe('카운트다운 테스트', () => {
 
     // when
     const { getByText, getByLabelText, queryByText } = render(
-      <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
         <Theme>
-          <Countdown />
+          <CountdownTemplate />
         </Theme>
-      </RecoilRoot>,
+      </QueryClientProvider>,
     );
     const minuteInput = getByLabelText(MINUTE_REGEXP);
     const secondInput = getByLabelText(SECOND_REGEXP);
@@ -200,11 +202,11 @@ describe('카운트다운 테스트', () => {
 
     // when
     const { getByText, getByLabelText } = render(
-      <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
         <Theme>
-          <Countdown />
+          <CountdownTemplate />
         </Theme>
-      </RecoilRoot>,
+      </QueryClientProvider>,
     );
     const minuteInput = getByLabelText(MINUTE_REGEXP);
     const secondInput = getByLabelText(SECOND_REGEXP);
