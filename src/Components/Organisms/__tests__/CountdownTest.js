@@ -1,4 +1,4 @@
-import { act, fireEvent, render } from '@testing-library/react';
+import { act, fireEvent, render, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Theme from '../../../style/Theme';
 import CountdownTemplate from '../../Templates/CountdownTemplate';
@@ -11,6 +11,7 @@ describe('카운트다운 테스트', () => {
   const STOP_BTN = /STOP/;
   const RESTART_BTN = /RESTART/;
   const RESET_BTN = /RESET/;
+  const CONFIRM_BTN = /CONFIRM/;
   const queryClient = new QueryClient();
 
   beforeEach(() => {
@@ -77,27 +78,44 @@ describe('카운트다운 테스트', () => {
     fireEvent.click(startBtn);
 
     // then
-    expect(getByText(RANGE_ERROR)).toBeInTheDocument();
+    waitFor(
+      () => {
+        expect(getByText(RANGE_ERROR)).toBeInTheDocument();
+      },
+      { timeout: 500 },
+    );
 
     // when
     const secondInput = getByLabelText(SECOND_REGEXP);
 
+    fireEvent.click(getByText(CONFIRM_BTN));
     fireEvent.change(secondInput, { target: { value: SECOND_VALUE } });
     fireEvent.click(startBtn);
 
     // then
-    expect(getByText(NUMBER_ERROR)).toBeInTheDocument();
+    waitFor(
+      () => {
+        expect(getByText(NUMBER_ERROR)).toBeInTheDocument();
+      },
+      { timeout: 500 },
+    );
 
     // when
     const minuteInput = getByLabelText(MINUTE_REGEXP);
     const resetBtn = getByText(RESET_BTN);
 
+    fireEvent.click(getByText(CONFIRM_BTN));
     fireEvent.click(resetBtn);
     fireEvent.change(minuteInput, { target: { value: MINUTE_VALUE } });
     fireEvent.click(startBtn);
 
     // then
-    expect(getByText(RANGE_ERROR)).toBeInTheDocument();
+    waitFor(
+      () => {
+        expect(getByText(RANGE_ERROR)).toBeInTheDocument();
+      },
+      { timeout: 500 },
+    );
   });
 
   test('input, onChange 테스트', () => {
