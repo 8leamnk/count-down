@@ -46,7 +46,12 @@ function Countdown() {
     <>
       <Subject title="TIMER" subTitle="COUNTDOWN\nPROGRAM" />
       <Time time={time} />
-      <Inputs inputs={inputs} onChange={onChange} />
+      <Inputs
+        inputs={inputs}
+        type="number"
+        placeholder="00"
+        onChange={onChange}
+      />
       <Operation
         isStart={isStart}
         isPause={isPause}

@@ -13,24 +13,19 @@ S.Wrapper = styled.section`
   margin-bottom: 20px;
 `;
 
-S.Input = styled(Input).attrs({
-  type: 'number',
-  placeholder: '00',
-})``;
-
 const OPTIONS = Object.freeze({
   padding: { outer: 4, inner: 12 },
   radius: 8,
   height: 52,
 });
 
-function Inputs({ inputs, onChange }) {
+function Inputs({ inputs, ...inputOptions }) {
   return (
     <S.Wrapper>
       {Object.entries(inputs).map(([inputKey, number]) => (
         <Label key={inputKey} labelText={inputKey.toLocaleUpperCase()}>
           <BoxLayout {...OPTIONS}>
-            <S.Input name={inputKey} value={number} onChange={onChange} />
+            <Input name={inputKey} value={number} {...inputOptions} />
           </BoxLayout>
         </Label>
       ))}
