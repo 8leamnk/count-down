@@ -55,10 +55,8 @@ function useSlider({ ref, size, rate, autoTimer, timer }) {
   };
 
   const clearTimer = () => {
-    if (intervalId.current) {
-      clearInterval(intervalId.current);
-      intervalId.current = null;
-    }
+    clearInterval(intervalId.current);
+    intervalId.current = null;
   };
 
   useEffect(() => {
