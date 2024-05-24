@@ -4,7 +4,7 @@ import { useAnimation } from 'framer-motion';
 
 function useSlider({ ref, size, rate, autoTimer, timer }) {
   const animation = useAnimation();
-  const intervalId = useRef(null);
+  const intervalID = useRef(null);
   const [rect, setRect] = useState({});
   const [swipeNumber, setSwipeNumber] = useState(0);
   const [index, setIndex] = useState({
@@ -47,7 +47,7 @@ function useSlider({ ref, size, rate, autoTimer, timer }) {
 
   const startTimer = () => {
     if (autoTimer) {
-      intervalId.current = setInterval(async () => {
+      intervalID.current = setInterval(async () => {
         await animation.start('toLeft');
         changeSwipeNumber(1);
       }, timer);
@@ -55,8 +55,8 @@ function useSlider({ ref, size, rate, autoTimer, timer }) {
   };
 
   const clearTimer = () => {
-    clearInterval(intervalId.current);
-    intervalId.current = null;
+    clearInterval(intervalID.current);
+    intervalID.current = null;
   };
 
   useEffect(() => {
