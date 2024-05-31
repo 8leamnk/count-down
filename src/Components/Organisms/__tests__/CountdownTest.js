@@ -144,6 +144,7 @@ describe('카운트다운 테스트', () => {
 
   test('카운트다운 동작 테스트', () => {
     // given
+    const CLOCK_IMAGE_ALT = 'clock';
     const MINUTE_VALUE = '0';
     const SECOND_VALUE = '67';
     const INITIAL_TIME = /00:00/;
@@ -153,24 +154,30 @@ describe('카운트다운 테스트', () => {
     const AFTER_TIME_2 = /00:59/;
 
     // when
-    const { getByText, getByLabelText, queryByText } = render(
+    const { getByText, getByLabelText, queryByText, getByAltText } = render(
       <QueryClientProvider client={queryClient}>
         <Theme>
           <CountdownTemplate />
         </Theme>
       </QueryClientProvider>,
     );
+    const clockImage = getByAltText(CLOCK_IMAGE_ALT);
     const minuteInput = getByLabelText(MINUTE_REGEXP);
     const secondInput = getByLabelText(SECOND_REGEXP);
     const startBtn = getByText(START_BTN);
     const stopBtn = getByText(STOP_BTN);
     const resetBtn = getByText(RESET_BTN);
 
+    // then
+    expect(clockImage).toHaveStyle('opacity: 0.55');
+
+    // when
     fireEvent.change(minuteInput, { target: { value: MINUTE_VALUE } });
     fireEvent.change(secondInput, { target: { value: SECOND_VALUE } });
     fireEvent.click(startBtn);
 
     // then
+    expect(clockImage).toHaveStyle('opacity: 1');
     expect(getByText(SET_TIME)).toBeInTheDocument();
     expect(startBtn).toHaveStyle('background-color: #413d3f');
     expect(stopBtn).toHaveStyle('background-color: #ff3215');
