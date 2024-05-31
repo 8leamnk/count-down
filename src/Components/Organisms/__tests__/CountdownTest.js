@@ -5,6 +5,7 @@ import CountdownTemplate from '../../Templates/CountdownTemplate';
 import Popup from '../../Molecules/Popup';
 
 describe('카운트다운 테스트', () => {
+  const CLOCK_IMAGE_ALT = /clock/;
   const MINUTE_REGEXP = /MINUTE/;
   const SECOND_REGEXP = /SECOND/;
   const START_BTN = /START/;
@@ -12,6 +13,8 @@ describe('카운트다운 테스트', () => {
   const RESTART_BTN = /RESTART/;
   const RESET_BTN = /RESET/;
   const CONFIRM_BTN = /CONFIRM/;
+  const DISABLED_CLOCK = 'opacity: 0.55';
+  const NOT_DISABLED_CLOCK = 'opacity: 1';
   const queryClient = new QueryClient();
 
   beforeEach(() => {
@@ -144,7 +147,6 @@ describe('카운트다운 테스트', () => {
 
   test('카운트다운 동작 테스트', () => {
     // given
-    const CLOCK_IMAGE_ALT = 'clock';
     const MINUTE_VALUE = '0';
     const SECOND_VALUE = '67';
     const INITIAL_TIME = /00:00/;
@@ -169,7 +171,7 @@ describe('카운트다운 테스트', () => {
     const resetBtn = getByText(RESET_BTN);
 
     // then
-    expect(clockImage).toHaveStyle('opacity: 0.55');
+    expect(clockImage).toHaveStyle(DISABLED_CLOCK);
 
     // when
     fireEvent.change(minuteInput, { target: { value: MINUTE_VALUE } });
@@ -177,7 +179,7 @@ describe('카운트다운 테스트', () => {
     fireEvent.click(startBtn);
 
     // then
-    expect(clockImage).toHaveStyle('opacity: 1');
+    expect(clockImage).toHaveStyle(NOT_DISABLED_CLOCK);
     expect(getByText(SET_TIME)).toBeInTheDocument();
     expect(startBtn).toHaveStyle('background-color: #413d3f');
     expect(stopBtn).toHaveStyle('background-color: #ff3215');
@@ -212,6 +214,7 @@ describe('카운트다운 테스트', () => {
     fireEvent.click(resetBtn);
 
     // then
+    expect(clockImage).toHaveStyle(DISABLED_CLOCK);
     expect(getByText(INITIAL_TIME)).toBeInTheDocument();
     expect(queryByText(RESTART_BTN)).not.toBeInTheDocument();
     expect(stopBtn).toHaveStyle('background-color: #a8b1b2');
@@ -226,13 +229,14 @@ describe('카운트다운 테스트', () => {
     const SKIP_TIME = 7000;
 
     // when
-    const { getByText, getByLabelText } = render(
+    const { getByText, getByLabelText, getByAltText } = render(
       <QueryClientProvider client={queryClient}>
         <Theme>
           <CountdownTemplate />
         </Theme>
       </QueryClientProvider>,
     );
+    const clockImage = getByAltText(CLOCK_IMAGE_ALT);
     const minuteInput = getByLabelText(MINUTE_REGEXP);
     const secondInput = getByLabelText(SECOND_REGEXP);
     const startBtn = getByText(START_BTN);
@@ -241,6 +245,7 @@ describe('카운트다운 테스트', () => {
     fireEvent.click(startBtn);
 
     // then
+    expect(clockImage).toHaveStyle(NOT_DISABLED_CLOCK);
     expect(minuteInput.value).toBe(MINUTE_VALUE.first);
     expect(secondInput.value).toBe(SECOND_VALUE.first);
 
@@ -250,6 +255,7 @@ describe('카운트다운 테스트', () => {
     });
 
     // then
+    expect(clockImage).toHaveStyle(DISABLED_CLOCK);
     expect(minuteInput.value).toBe(MINUTE_VALUE.last);
     expect(secondInput.value).toBe(SECOND_VALUE.last);
     expect(getByText(INITIAL_TIME)).toBeInTheDocument();
