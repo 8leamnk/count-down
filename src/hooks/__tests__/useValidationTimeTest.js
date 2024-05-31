@@ -48,9 +48,9 @@ describe('입력값 유효성 검사 기능 테스트', () => {
     });
   });
 
-  test('총 3600초 이상의 숫자를 입력하면 예외가 발생한다.', () => {
+  test('총 6000초 이상의 숫자를 입력하면 예외가 발생한다.', () => {
     // given
-    const INPUTS = { minute: '60', second: '0' };
+    const INPUTS = { minute: '100', second: '0' };
 
     // when
     const { result } = renderHook((props) => useValidationTime(props), {
@@ -69,10 +69,11 @@ describe('입력값 유효성 검사 기능 테스트', () => {
     });
   });
 
-  test('총 1초 이상 59분 59초 이하의 숫자를 입력하면 예외가 발생하지 않는다.', () => {
+  test('총 1초 이상 99분 59초 이하의 숫자를 입력하면 예외가 발생하지 않는다.', () => {
     // given
-    const INPUTS = { minute: '1', second: '30' };
-    const OUTPUT = 90000;
+    const MS = 1000;
+    const INPUTS = { minute: '99', second: '30' };
+    const OUTPUT = 5970 * MS;
 
     // when
     const { result } = renderHook((props) => useValidationTime(props), {

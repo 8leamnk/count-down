@@ -10,14 +10,14 @@ const TIME_MAP = new Map([
 const ERROR_MESSAGE = Object.freeze({
   notNumber: '숫자만 입력해 주세요.',
   rangeEach: '0 이상의 숫자를 입력해 주세요.',
-  rangeTotal: '최소 0분 1초, 최대 59분 59초의 시간을 입력해 주세요.',
+  rangeTotal: '최소 0분 1초, 최대 99분 59초의 시간을 입력해 주세요.',
 });
 const RANGE = Object.freeze({
   hour: 0,
   minute: 0,
   second: 0,
   min: 1,
-  max: 3599,
+  max: 5999,
 });
 const ERROR_INFO = Object.freeze({
   return: 0,

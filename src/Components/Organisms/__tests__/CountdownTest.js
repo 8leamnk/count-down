@@ -59,10 +59,10 @@ describe('카운트다운 테스트', () => {
 
   test('예외 테스트', () => {
     // given
-    const MINUTE_VALUE = '60';
+    const MINUTE_VALUE = '100';
     const SECOND_VALUE = '-7';
     const NUMBER_ERROR = '0 이상의 숫자를 입력해 주세요.';
-    const RANGE_ERROR = '최소 0분 1초, 최대 59분 59초의 시간을 입력해 주세요.';
+    const RANGE_ERROR = '최소 0분 1초, 최대 99분 59초의 시간을 입력해 주세요.';
 
     // when
     const { getByText, getByLabelText } = render(
