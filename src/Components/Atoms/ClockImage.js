@@ -4,14 +4,14 @@ import VALUE from '../../constants/value';
 // style
 const S = {};
 
-S.Clock = styled.img.attrs(({ $disabled }) => {
+S.Clock = styled.img.attrs(() => {
   return {
-    src: $disabled
-      ? `${VALUE.public}/assets/images/clock-disabled.svg`
-      : `${VALUE.public}/assets/images/clock.svg`,
+    src: `${VALUE.public}/assets/images/clock.svg`,
     alt: 'clock',
   };
-})``;
+})`
+  opacity: ${({ $disabled }) => ($disabled ? 0.55 : 1)};
+`;
 
 function ClockImage({ disabled, ...rest }) {
   return <S.Clock $disabled={disabled} {...rest} />;
