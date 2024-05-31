@@ -10,6 +10,7 @@ S.Clock = styled.img.attrs(() => {
     alt: 'clock',
   };
 })`
+  width: 72px;
   opacity: ${({ $disabled }) => ($disabled ? 0.55 : 1)};
 `;
 

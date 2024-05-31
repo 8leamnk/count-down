@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { mobile } from '../../style/mediaQuery';
 import Button from '../Atoms/Button';
 
 // style
@@ -8,6 +9,15 @@ S.Wrapper = styled.section`
   width: 100%;
   display: flex;
   gap: 8px;
+
+  ${mobile(css`
+    flex-direction: column;
+
+    button {
+      width: 100%;
+      height: 48px;
+    }
+  `)}
 `;
 
 S.StartBtn = styled(Button)`
@@ -17,7 +27,7 @@ S.StartBtn = styled(Button)`
     $isStart ? theme.colors.gray007 : theme.colors.red001};
   color: ${({ theme, $isStart }) =>
     $isStart ? theme.colors.gray006 : theme.colors.white};
-  font-size: ${({ theme }) => `${theme.fontSize.large}px`};
+  font-size: ${({ theme }) => theme.fontSize.large}px;
   font-weight: 900;
   cursor: ${({ $isStart }) => ($isStart ? 'auto' : 'pointer')};
 `;

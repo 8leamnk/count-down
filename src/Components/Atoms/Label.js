@@ -5,7 +5,7 @@ const S = {};
 
 S.Label = styled.label`
   color: ${({ theme }) => theme.colors.primary};
-  font-size: ${({ theme }) => `${theme.fontSize.base}px`};
+  font-size: ${({ theme }) => theme.fontSize.base}px;
   font-weight: 400;
   letter-spacing: -0.4px;
 `;

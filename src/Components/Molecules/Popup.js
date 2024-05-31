@@ -23,7 +23,7 @@ S.Confirm = styled.div`
 `;
 
 S.ConfirmBtn = styled(Button)`
-  font-size: ${({ theme }) => `${theme.fontSize.large}px`};
+  font-size: ${({ theme }) => theme.fontSize.large}px;
   font-weight: 900;
   background-color: ${({ theme }) => theme.colors.gray007};
   cursor: pointer;

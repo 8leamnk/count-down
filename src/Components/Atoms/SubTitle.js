@@ -5,7 +5,7 @@ const S = {};
 
 S.SubTitle = styled.h2`
   color: ${({ theme }) => theme.colors.primary};
-  font-size: ${({ theme }) => `${theme.fontSize.base}px`};
+  font-size: ${({ theme }) => theme.fontSize.base}px;
   font-weight: 300;
 `;
 

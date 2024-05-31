@@ -8,7 +8,7 @@ const S = {};
 
 S.Container = styled.div`
   width: 100%;
-  height: ${({ $height }) => `${$height}px`};
+  height: ${({ $height }) => $height}px;
   overflow-x: hidden;
   background-color: #fff;
 `;
@@ -19,11 +19,11 @@ S.Slider = styled(motion.ul)`
 `;
 
 S.Item = styled.li`
-  height: ${({ $height }) => `${$height}px`};
+  height: ${({ $height }) => $height}px;
   flex: 1 0 100%;
 
   & > * {
-    height: ${({ $height }) => `${$height}px`};
+    height: ${({ $height }) => $height}px;
   }
 `;
 

@@ -3,6 +3,7 @@ const FONT_SIZE = Object.freeze({
   base: 20,
   large: 24,
   xLarge: 40,
+  largest: 80,
   title: 100,
 });
 

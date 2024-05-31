@@ -6,7 +6,7 @@ const S = {};
 S.Description = styled.h2`
   font-family: 'Pretendard', sans-serif;
   color: ${({ theme }) => theme.colors.gray008};
-  font-size: ${({ theme }) => `${theme.fontSize.base}px`};
+  font-size: ${({ theme }) => theme.fontSize.base}px;
   font-weight: 400;
 `;
 

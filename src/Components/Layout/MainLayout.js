@@ -1,4 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { mobile } from '../../style/mediaQuery';
+import mixin from '../../style/mixin';
 
 // style
 const S = {};
@@ -9,10 +11,17 @@ S.Layout = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 16px;
+  box-sizing: border-box;
+
+  ${mobile(css`
+    height: 100%;
+    display: block;
+  `)}
 `;
 
 S.Inner = styled.section`
-  width: 416px;
+  width: clamp(${mixin.minWidthLimit}px, 100%, 416px);
 `;
 
 function MainLayout({ children }) {

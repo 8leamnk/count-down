@@ -1,4 +1,6 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+import { mobile } from '../../style/mediaQuery';
+import mixin from '../../style/mixin';
 
 // style
 const S = {};
@@ -20,10 +22,15 @@ S.Background = styled.section`
   left: 0;
   z-index: 1;
   animation: ${fadeIn} 0.15s;
+
+  ${mobile(css`
+    padding: 0 16px;
+    box-sizing: border-box;
+  `)}
 `;
 
 S.Inner = styled.div`
-  width: ${({ $width }) => `${$width}px`};
+  width: clamp(${mixin.minWidthLimit}px, 100%, ${({ $width }) => $width}px);
   display: flex;
   flex-direction: column;
   gap: 40px;

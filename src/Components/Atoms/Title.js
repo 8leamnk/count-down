@@ -5,7 +5,7 @@ const S = {};
 
 S.Title = styled.h1`
   color: ${({ theme }) => theme.colors.primary};
-  font-size: ${({ theme }) => `${theme.fontSize.xLarge}px`};
+  font-size: ${({ theme }) => theme.fontSize.xLarge}px;
   font-weight: 700;
   letter-spacing: -0.8px;
 `;
