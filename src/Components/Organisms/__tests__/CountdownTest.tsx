@@ -1,8 +1,7 @@
 import { act, fireEvent, render, waitFor } from '@testing-library/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Theme from '../../../style/Theme';
+import Theme from '@/style/Theme';
 import CountdownTemplate from '../../Templates/CountdownTemplate';
-import Popup from '../../Molecules/Popup';
+import Modal from '../../Molecules/Modal';
 
 describe('카운트다운 테스트', () => {
   const CLOCK_IMAGE_ALT = /clock/;
@@ -15,7 +14,6 @@ describe('카운트다운 테스트', () => {
   const CONFIRM_BTN = /CONFIRM/;
   const DISABLED_CLOCK = 'opacity: 0.55';
   const NOT_DISABLED_CLOCK = 'opacity: 1';
-  const queryClient = new QueryClient();
 
   beforeEach(() => {
     jest.useFakeTimers();
@@ -43,11 +41,9 @@ describe('카운트다운 테스트', () => {
 
     // when
     const { getByText, getByLabelText } = render(
-      <QueryClientProvider client={queryClient}>
-        <Theme>
-          <CountdownTemplate />
-        </Theme>
-      </QueryClientProvider>,
+      <Theme>
+        <CountdownTemplate />
+      </Theme>,
     );
 
     // then
@@ -69,12 +65,10 @@ describe('카운트다운 테스트', () => {
 
     // when
     const { getByText, getByLabelText } = render(
-      <QueryClientProvider client={queryClient}>
-        <Theme>
-          <CountdownTemplate />
-          <Popup />
-        </Theme>
-      </QueryClientProvider>,
+      <Theme>
+        <CountdownTemplate />
+        <Modal />
+      </Theme>,
     );
     const startBtn = getByText(START_BTN);
 
@@ -128,11 +122,9 @@ describe('카운트다운 테스트', () => {
 
     // when
     const { getByLabelText } = render(
-      <QueryClientProvider client={queryClient}>
-        <Theme>
-          <CountdownTemplate />
-        </Theme>
-      </QueryClientProvider>,
+      <Theme>
+        <CountdownTemplate />
+      </Theme>,
     );
     const minuteInput = getByLabelText(MINUTE_REGEXP);
     const secondInput = getByLabelText(SECOND_REGEXP);
@@ -141,8 +133,8 @@ describe('카운트다운 테스트', () => {
     fireEvent.change(secondInput, { target: { value: SECOND_VALUE } });
 
     // then
-    expect(minuteInput.value).toBe(MINUTE_VALUE);
-    expect(secondInput.value).toBe(SECOND_VALUE);
+    expect(minuteInput).toHaveValue(MINUTE_VALUE);
+    expect(secondInput).toHaveValue(SECOND_VALUE);
   });
 
   test('카운트다운 동작 테스트', () => {
@@ -157,11 +149,9 @@ describe('카운트다운 테스트', () => {
 
     // when
     const { getByText, getByLabelText, queryByText, getByAltText } = render(
-      <QueryClientProvider client={queryClient}>
-        <Theme>
-          <CountdownTemplate />
-        </Theme>
-      </QueryClientProvider>,
+      <Theme>
+        <CountdownTemplate />
+      </Theme>,
     );
     const clockImage = getByAltText(CLOCK_IMAGE_ALT);
     const minuteInput = getByLabelText(MINUTE_REGEXP);
@@ -230,11 +220,9 @@ describe('카운트다운 테스트', () => {
 
     // when
     const { getByText, getByLabelText, getByAltText } = render(
-      <QueryClientProvider client={queryClient}>
-        <Theme>
-          <CountdownTemplate />
-        </Theme>
-      </QueryClientProvider>,
+      <Theme>
+        <CountdownTemplate />
+      </Theme>,
     );
     const clockImage = getByAltText(CLOCK_IMAGE_ALT);
     const minuteInput = getByLabelText(MINUTE_REGEXP);
@@ -246,8 +234,8 @@ describe('카운트다운 테스트', () => {
 
     // then
     expect(clockImage).toHaveStyle(NOT_DISABLED_CLOCK);
-    expect(minuteInput.value).toBe(MINUTE_VALUE.first);
-    expect(secondInput.value).toBe(SECOND_VALUE.first);
+    expect(minuteInput).toHaveValue(MINUTE_VALUE.first);
+    expect(secondInput).toHaveValue(SECOND_VALUE.first);
 
     // when
     act(() => {
@@ -256,8 +244,8 @@ describe('카운트다운 테스트', () => {
 
     // then
     expect(clockImage).toHaveStyle(DISABLED_CLOCK);
-    expect(minuteInput.value).toBe(MINUTE_VALUE.last);
-    expect(secondInput.value).toBe(SECOND_VALUE.last);
+    expect(minuteInput).toHaveValue(MINUTE_VALUE.last);
+    expect(secondInput).toHaveValue(SECOND_VALUE.last);
     expect(getByText(INITIAL_TIME)).toBeInTheDocument();
   });
 });

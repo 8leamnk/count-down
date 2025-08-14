@@ -7,6 +7,14 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [["@", "./src"]],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
   "extends": [
     "airbnb",
     "prettier",
@@ -23,7 +31,16 @@
     "curly": ["error", "all"],
     "eqeqeq": ["error", "always", { "null": "ignore" }],
     "import/no-duplicates": "error",
-    "import/extensions": ["error", "never"],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
     "default-case": ["error", { "commentPattern": "^skip\\sdefault" }],
     "no-shadow": [
       "warn",

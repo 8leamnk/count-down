@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import VALUE from '../constants/value';
+import { UNIT } from '@/constants/global';
 
 function useCountdown() {
   const intervalID = useRef(null);
@@ -7,15 +7,19 @@ function useCountdown() {
   const [isStart, setIsStart] = useState(false);
   const [isPause, setIsPause] = useState(false);
 
-  const createTimer = () => {
-    intervalID.current = setInterval(() => {
-      setTime((curState) => curState - VALUE.msUnit);
-    }, VALUE.msUnit);
+  const removeTimer = () => {
+    if (intervalID.current) {
+      clearInterval(intervalID.current);
+      intervalID.current = null;
+    }
   };
 
-  const removeTimer = () => {
-    clearInterval(intervalID.current);
-    intervalID.current = null;
+  const createTimer = () => {
+    removeTimer();
+
+    intervalID.current = setInterval(() => {
+      setTime((curState) => curState - UNIT.msUnit);
+    }, UNIT.msUnit);
   };
 
   const handleStart = (initialTime) => {
@@ -27,12 +31,14 @@ function useCountdown() {
   };
 
   const handlePause = () => {
-    if (isPause) {
-      setIsPause(false);
-      createTimer();
-    } else {
-      setIsPause(true);
-      removeTimer();
+    if (isStart) {
+      if (isPause) {
+        setIsPause(false);
+        createTimer();
+      } else {
+        setIsPause(true);
+        removeTimer();
+      }
     }
   };
 
@@ -42,6 +48,13 @@ function useCountdown() {
     setTime(0);
     removeTimer();
   };
+
+  useEffect(() => {
+    if (isStart && time === 0) {
+      handleReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isStart, time]);
 
   useEffect(() => {
     return () => {
