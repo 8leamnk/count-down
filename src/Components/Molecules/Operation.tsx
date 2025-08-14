@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { mobile } from '@/style/mediaQuery';
+import { mobile } from '../../style/mediaQuery';
 import Button from '../Atoms/Button';
 
 // style

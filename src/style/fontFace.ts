@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import { PUBLIC_PATH } from '@/constants/global';
+import { PUBLIC_PATH } from '../constants/global';
 
 const fontFace = css`
   @font-face {

@@ -1,6 +1,6 @@
-import type { ChildrenProps } from '@/types/props';
-import { BoxLayoutInfo, HeightInfo, RadiusInfo } from '@/types/style';
 import styled from 'styled-components';
+import type { BoxLayoutInfo, HeightInfo, RadiusInfo } from '../../types/style';
+import type { ChildrenProps } from '../../types/props';
 
 // style
 const S = {

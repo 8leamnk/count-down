@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { type ChangeEvent, useEffect, useState } from 'react';
 
 function useInputs<T>(initialInputs: T, resetTrigger: boolean = false) {
   const [inputs, setInputs] = useState<T>(initialInputs);
@@ -18,6 +18,7 @@ function useInputs<T>(initialInputs: T, resetTrigger: boolean = false) {
     if (resetTrigger) {
       resetInputs();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetTrigger]);
 
   return { inputs, onChange, resetInputs };

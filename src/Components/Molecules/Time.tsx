@@ -1,8 +1,8 @@
-import type { BoxLayoutInfo } from '@/types/style';
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { mobile } from '@/style/mediaQuery';
-import useConvertToTime from '@/hooks/useConvertToTime';
+import type { BoxLayoutInfo } from '../../types/style';
+import { mobile } from '../../style/mediaQuery';
+import useConvertToTime from '../../hooks/useConvertToTime';
 import BoxLayout from '../Layout/BoxLayout';
 import Clock from '../Atoms/Clock';
 import ClockImage from '../Atoms/ClockImage';

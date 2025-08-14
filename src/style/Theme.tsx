@@ -1,5 +1,5 @@
-import type { ChildrenProps } from '@/types/props';
 import { ThemeProvider } from 'styled-components';
+import type { ChildrenProps } from '../types/props';
 
 // style
 import GlobalStyle from './Global';

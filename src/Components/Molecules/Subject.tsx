@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { mobile } from '@/style/mediaQuery';
+import { mobile } from '../../style/mediaQuery';
 import Title from '../Atoms/Title';
 import SubTitle from '../Atoms/SubTitle';
 
@@ -43,7 +43,7 @@ function Subject({ title, subTitle }: SubjectProps) {
       <Title>{title}</Title>
 
       <S.SubTitles>
-        {subTitle.split(/\\n/g).map((word) => (
+        {subTitle.split(/\n/g).map((word) => (
           <SubTitle key={word}>{word}</SubTitle>
         ))}
       </S.SubTitles>

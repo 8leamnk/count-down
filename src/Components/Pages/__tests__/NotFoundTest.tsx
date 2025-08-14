@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import Theme from '@/style/Theme';
+import Theme from '../../../style/Theme';
 import Home from '../Home';
 import NotFound from '../NotFound';
 

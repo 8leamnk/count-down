@@ -1,5 +1,5 @@
 import { act, fireEvent, render, waitFor } from '@testing-library/react';
-import Theme from '@/style/Theme';
+import Theme from '../../../style/Theme';
 import CountdownTemplate from '../../Templates/CountdownTemplate';
 import Modal from '../../Molecules/Modal';
 

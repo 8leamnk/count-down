@@ -1,4 +1,4 @@
-import type { CountdownInputs } from '@/types/countdown';
+import type { CountdownInputs } from '../../types/countdown';
 
 // hooks
 import useInputs from '../../hooks/useInputs';
@@ -12,7 +12,7 @@ import Inputs from '../Molecules/Inputs';
 import Operation from '../Molecules/Operation';
 
 // constants
-import { PROJECT_NAME } from '@/constants/global';
+import { PROJECT_NAME } from '../../constants/global';
 
 const INITIAL_INPUTS: CountdownInputs = { minute: '', second: '' };
 

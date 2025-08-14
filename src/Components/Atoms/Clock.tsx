@@ -1,6 +1,6 @@
-import type { ChildrenProps } from '@/types/props';
 import styled, { css } from 'styled-components';
-import { mobile } from '@/style/mediaQuery';
+import { mobile } from '../../style/mediaQuery';
+import type { ChildrenProps } from '../../types/props';
 
 // style
 const S = {

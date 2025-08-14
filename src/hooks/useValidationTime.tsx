@@ -1,5 +1,5 @@
-import type { CountdownInputs, InputKey } from '@/types/countdown';
-import { useModalInfo } from '@/store/modal';
+import type { CountdownInputs, InputKey } from '../types/countdown';
+import { useModalInfo } from '../store/modal';
 import { UNIT } from '../constants/global';
 
 type CountdownMapData = Map<InputKey, number | string>;

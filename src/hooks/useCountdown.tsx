@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { UNIT } from '@/constants/global';
+import { UNIT } from '../constants/global';
 
 function useCountdown() {
   const intervalID = useRef<NodeJS.Timeout>(null);

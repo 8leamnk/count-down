@@ -1,7 +1,7 @@
-import type { ChildrenProps } from '@/types/props';
 import styled, { css } from 'styled-components';
-import mixin from '@/style/mixin';
-import { mobile } from '@/style/mediaQuery';
+import mixin from '../../style/mixin';
+import { mobile } from '../../style/mediaQuery';
+import type { ChildrenProps } from '../../types/props';
 
 // style
 const S = {

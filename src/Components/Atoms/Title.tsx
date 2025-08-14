@@ -1,5 +1,5 @@
-import type { ChildrenProps } from '@/types/props';
 import styled from 'styled-components';
+import type { ChildrenProps } from '../../types/props';
 
 // style
 const S = {

@@ -1,5 +1,5 @@
-import { useModalInfo } from '@/store/modal';
 import styled from 'styled-components';
+import { useModalInfo } from '../../store/modal';
 import ModalLayout from '../Layout/ModalLayout';
 import Title from '../Atoms/Title';
 import Description from '../Atoms/Description';
@@ -45,7 +45,7 @@ function Modal() {
     );
   }
 
-  return '';
+  return <></>;
 }
 
 export default Modal;

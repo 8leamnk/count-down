@@ -1,7 +1,7 @@
 import styled, { css, keyframes } from 'styled-components';
 import { mobile } from '../../style/mediaQuery';
 import mixin from '../../style/mixin';
-import type { ChildrenProps } from '@/types/props';
+import type { ChildrenProps } from '../../types/props';
 
 // style
 const fadeIn = keyframes`
@@ -60,5 +60,9 @@ function ModalLayout({
     </S.Background>
   );
 }
+
+ModalLayout.defaultProps = {
+  popupWidth: 416,
+};
 
 export default ModalLayout;

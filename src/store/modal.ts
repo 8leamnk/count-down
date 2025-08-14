@@ -1,5 +1,5 @@
-import type { ModalInfo } from '../types/global';
 import { create } from 'zustand';
+import type { ModalInfo } from '../types/global';
 
 interface ModalInfoState {
   modalInfo: ModalInfo | null;

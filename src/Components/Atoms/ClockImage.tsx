@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { PUBLIC_PATH } from '@/constants/global';
+import { PUBLIC_PATH } from '../../constants/global';
 
 // style
 const S = {

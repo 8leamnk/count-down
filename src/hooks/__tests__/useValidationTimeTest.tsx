@@ -1,6 +1,6 @@
-import type { CountdownInputs } from '@/types/countdown';
 import { act, renderHook } from '@testing-library/react';
 import useValidationTime from '../useValidationTime';
+import type { CountdownInputs } from '../../types/countdown';
 
 const ERROR_RETURN = 0;
 
