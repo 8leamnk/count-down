@@ -50,7 +50,6 @@ describe('카운트다운 주요 기능 테스트', () => {
     // given
     const INITIAL_TIME = 7000;
     const AFTER_TIME = 3000;
-    const TIMEOUT = 2000;
     const IS_PAUSE = true;
     const TIME = 4000;
     const NOT_TIME = 2000;
@@ -61,19 +60,19 @@ describe('카운트다운 주요 기능 테스트', () => {
     act(() => {
       result.current.handleStart(INITIAL_TIME);
       jest.advanceTimersByTime(AFTER_TIME);
-      result.current.handlePause(INITIAL_TIME);
+    });
+
+    act(() => {
+      result.current.handlePause();
     });
 
     // then
     expect(result.current.isPause).toBe(IS_PAUSE);
     expect(result.current.time).toBe(TIME);
 
-    await waitFor(
-      () => {
-        expect(result.current.time).not.toBe(NOT_TIME);
-      },
-      { timeout: TIMEOUT },
-    );
+    await waitFor(() => {
+      expect(result.current.time).not.toBe(NOT_TIME);
+    });
   });
 
   test('타이머가 다 끝나기도 전에 리셋 버튼을 누르면 time이 0이 되고 start, pause 상태가 false가 된다.', () => {

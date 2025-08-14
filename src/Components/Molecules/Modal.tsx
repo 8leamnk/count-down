@@ -1,6 +1,6 @@
 import { useModalInfo } from '@/store/modal';
 import styled from 'styled-components';
-import PopupLayout from '../Layout/PopupLayout';
+import ModalLayout from '../Layout/ModalLayout';
 import Title from '../Atoms/Title';
 import Description from '../Atoms/Description';
 import Button from '../Atoms/Button';
@@ -33,7 +33,7 @@ function Modal() {
 
   if (modalInfo) {
     return (
-      <PopupLayout onClick={closeModal}>
+      <ModalLayout onClick={closeModal}>
         <S.Title>{modalInfo.title}</S.Title>
 
         <Description>{modalInfo.description}</Description>
@@ -41,7 +41,7 @@ function Modal() {
         <S.Confirm>
           <S.ConfirmBtn onClick={closeModal}>CONFIRM</S.ConfirmBtn>
         </S.Confirm>
-      </PopupLayout>
+      </ModalLayout>
     );
   }
 

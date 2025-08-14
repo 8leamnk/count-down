@@ -1,0 +1,83 @@
+import styled, { css } from 'styled-components';
+import { mobile } from '@/style/mediaQuery';
+import Button from '../Atoms/Button';
+
+// style
+const S = {
+  Wrapper: styled.section`
+    width: 100%;
+    display: flex;
+    gap: 8px;
+
+    ${mobile(css`
+      flex-direction: column;
+
+      button {
+        width: 100%;
+        height: 48px;
+      }
+    `)}
+  `,
+
+  StartBtn: styled(Button)`
+    width: 200px;
+    flex: none;
+    background-color: ${({ theme, $isStart }) =>
+      $isStart ? theme.colors.gray007 : theme.colors.red001};
+    color: ${({ theme, $isStart }) =>
+      $isStart ? theme.colors.gray006 : theme.colors.white};
+    font-size: ${({ theme }) => theme.fontSize.large}px;
+    font-weight: 900;
+    cursor: ${({ $isStart }) => ($isStart ? 'auto' : 'pointer')};
+  `,
+
+  PauseBtn: styled(Button)`
+    background-color: ${({ theme, $isStart }) =>
+      $isStart ? theme.colors.red001 : theme.colors.gray002};
+    cursor: ${({ $isStart }) => ($isStart ? 'pointer' : 'auto')};
+  `,
+
+  ResetBtn: styled(Button)`
+    background-color: ${({ theme }) => theme.colors.gray002};
+    cursor: pointer;
+  `,
+};
+
+const BUTTON_TYPES = Object.freeze({
+  start: 'START',
+  stop: 'STOP',
+  restart: 'RESTART',
+  reset: 'RESET',
+});
+
+interface OperationProps {
+  isStart: boolean;
+  isPause: boolean;
+  onStart: () => void;
+  onPause: () => void;
+  onReset: () => void;
+}
+
+function Operation({
+  isStart,
+  isPause,
+  onStart,
+  onPause,
+  onReset,
+}: OperationProps) {
+  return (
+    <S.Wrapper>
+      <S.StartBtn $isStart={isStart} onClick={onStart}>
+        {BUTTON_TYPES.start}
+      </S.StartBtn>
+
+      <S.PauseBtn $isStart={isStart} onClick={onPause}>
+        {isPause ? BUTTON_TYPES.restart : BUTTON_TYPES.stop}
+      </S.PauseBtn>
+
+      <S.ResetBtn onClick={onReset}>{BUTTON_TYPES.reset}</S.ResetBtn>
+    </S.Wrapper>
+  );
+}
+
+export default Operation;

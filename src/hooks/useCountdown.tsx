@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { UNIT } from '@/constants/global';
 
 function useCountdown() {
-  const intervalID = useRef(null);
+  const intervalID = useRef<NodeJS.Timeout>(null);
   const [time, setTime] = useState(0);
   const [isStart, setIsStart] = useState(false);
   const [isPause, setIsPause] = useState(false);
@@ -22,7 +22,7 @@ function useCountdown() {
     }, UNIT.msUnit);
   };
 
-  const handleStart = (initialTime) => {
+  const handleStart = (initialTime: number) => {
     if (initialTime > 0) {
       setIsStart(true);
       setTime(initialTime);

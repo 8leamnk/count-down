@@ -5,20 +5,20 @@ import Title from '../Atoms/Title';
 import Button from '../Atoms/Button';
 
 // style
-const S = {};
+const S = {
+  Title: styled(Title)`
+    text-align: center;
+    margin-bottom: 20px;
+  `,
 
-S.Title = styled(Title)`
-  text-align: center;
-  margin-bottom: 20px;
-`;
-
-S.BackBtn = styled(Button)`
-  width: 100%;
-  font-size: ${({ theme }) => theme.fontSize.large}px;
-  font-weight: 900;
-  background-color: ${({ theme }) => theme.colors.red001};
-  cursor: pointer;
-`;
+  BackBtn: styled(Button)`
+    width: 100%;
+    font-size: ${({ theme }) => theme.fontSize.large}px;
+    font-weight: 900;
+    background-color: ${({ theme }) => theme.colors.red001};
+    cursor: pointer;
+  `,
+};
 
 function NotFoundTemplate() {
   const navigate = useNavigate();

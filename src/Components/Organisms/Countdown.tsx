@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import type { CountdownInputs } from '@/types/countdown';
 
 // hooks
 import useInputs from '../../hooks/useInputs';
@@ -11,40 +11,23 @@ import Time from '../Molecules/Time';
 import Inputs from '../Molecules/Inputs';
 import Operation from '../Molecules/Operation';
 
+// constants
+import { PROJECT_NAME } from '@/constants/global';
+
+const INITIAL_INPUTS: CountdownInputs = { minute: '', second: '' };
+
 function Countdown() {
-  const { inputs, onChange, resetInputs } = useInputs();
   const { getInitialTime } = useValidation();
   const { time, isStart, isPause, handleStart, handlePause, handleReset } =
     useCountdown();
-
-  const onStart = () => {
-    if (!isStart) {
-      const initialTime = getInitialTime(inputs);
-      handleStart(initialTime);
-    }
-  };
-
-  const onPause = () => {
-    if (isStart) {
-      handlePause();
-    }
-  };
-
-  const onReset = () => {
-    resetInputs();
-    handleReset();
-  };
-
-  useEffect(() => {
-    if (isStart && time === 0) {
-      onReset();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isStart, time]);
+  const { inputs, onChange, resetInputs } = useInputs(
+    INITIAL_INPUTS,
+    isStart && time === 0,
+  );
 
   return (
     <>
-      <Subject title="TIMER" subTitle="COUNTDOWN\nPROGRAM" />
+      <Subject title={PROJECT_NAME.title} subTitle={PROJECT_NAME.subTitle} />
       <Time time={time} />
       <Inputs
         inputs={inputs}
@@ -55,9 +38,17 @@ function Countdown() {
       <Operation
         isStart={isStart}
         isPause={isPause}
-        onStart={onStart}
-        onPause={onPause}
-        onReset={onReset}
+        onStart={() => {
+          if (!isStart) {
+            const initialTime = getInitialTime(inputs);
+            handleStart(initialTime);
+          }
+        }}
+        onPause={handlePause}
+        onReset={() => {
+          resetInputs();
+          handleReset();
+        }}
       />
     </>
   );

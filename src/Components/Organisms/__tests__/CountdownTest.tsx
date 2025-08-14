@@ -117,8 +117,8 @@ describe('카운트다운 테스트', () => {
 
   test('input, onChange 테스트', () => {
     // given
-    const MINUTE_VALUE = '1';
-    const SECOND_VALUE = '7';
+    const MINUTE_VALUE = 1;
+    const SECOND_VALUE = 7;
 
     // when
     const { getByLabelText } = render(
@@ -213,8 +213,8 @@ describe('카운트다운 테스트', () => {
 
   test('카운트 다운 종료 시 리셋 함수의 자동 호출 테스트', () => {
     // given
-    const MINUTE_VALUE = { first: '', last: '' };
-    const SECOND_VALUE = { first: '7', last: '' };
+    const MINUTE_VALUE = { first: null, last: null };
+    const SECOND_VALUE = { first: 7, last: null };
     const INITIAL_TIME = /00:00/;
     const SKIP_TIME = 7000;
 

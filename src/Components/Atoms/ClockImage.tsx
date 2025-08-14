@@ -16,6 +16,7 @@ const S = {
 
 interface ClockImageProps {
   disabled: boolean;
+  [key: string]: unknown;
 }
 
 function ClockImage({ disabled, ...rest }: ClockImageProps) {
